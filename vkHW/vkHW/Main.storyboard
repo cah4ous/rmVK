@@ -13,7 +13,6 @@
         <!--Navigation Controller-->
         <scene sceneID="I6f-BP-qfe">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lfD-bq-oMr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController navigationBarHidden="YES" id="05e-GW-Pe8" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9AS-Pd-pMb">
                         <autoresizingMask key="autoresizingMask"/>
@@ -22,13 +21,14 @@
                         <segue destination="ZQd-nU-wDH" kind="relationship" relationship="rootViewController" id="LWb-Al-GyH"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lfD-bq-oMr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-570" y="76"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="gMK-1N-yFg">
             <objects>
-                <viewController id="ZQd-nU-wDH" customClass="LoginViewController" customModule="newVKApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZQd-nU-wDH" customClass="LoginViewController" customModule="vkHW" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hGb-Cl-hhQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
