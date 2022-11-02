@@ -26,41 +26,24 @@ final class LoginViewController: UIViewController {
 
     // MARK: - Lifecycle
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShown(notification:)),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil
-        )
-
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide(notification:)),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
-
-        let tapGesture = UITapGestureRecognizer(
-            target: self,
-            action: #selector(hideKeyboard)
-        )
-        loginScrollView.addGestureRecognizer(tapGesture)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        removeKeyboardNotificationCenter()
     }
 
     // MARK: - Public Methods
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == Constants.segueIdentifier {
-            guard let loginText = loginTextField.text,
-                  let passwordText = passwordTextField.text
+            guard
+                identifier == Constants.segueIdentifier,
+                let loginText = loginTextField.text,
+                let passwordText = passwordTextField.text
             else { return false }
             if loginText == Constants.loginText, passwordText == Constants.passwordText {
                 performSegue(withIdentifier: Constants.segueIdentifier, sender: nil)
@@ -101,13 +84,35 @@ final class LoginViewController: UIViewController {
     @objc private func hideKeyboard() {
         loginScrollView.endEditing(true)
     }
-}
 
-/// Алерт ошибки пустых данных
-extension LoginViewController {
-    func errorAlert(title: String?, message: String?) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: Constants.alertActionText, style: .default))
-        present(alert, animated: true, completion: nil)
+    private func setupUI() {
+        configurateKeyboardNotificationCenter()
+    }
+
+    private func configurateKeyboardNotificationCenter() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShown(notification:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(notification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(hideKeyboard)
+        )
+        loginScrollView.addGestureRecognizer(tapGesture)
+    }
+
+    private func removeKeyboardNotificationCenter() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 }
