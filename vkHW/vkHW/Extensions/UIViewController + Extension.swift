@@ -1,4 +1,4 @@
-// ErrorAlert.swift
+// UIViewController + Extension.swift
 // Copyright © RoadMap. All rights reserved.
 
 import UIKit
@@ -13,7 +13,7 @@ extension UIViewController {
 
     // MARK: - Public Methods
 
-    func errorAlert(title: String, message: String) {
+    func showErrorAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: Constants.alertActionText, style: .default))
         present(alert, animated: true, completion: nil)

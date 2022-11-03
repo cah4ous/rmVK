@@ -49,7 +49,7 @@ final class LoginViewController: UIViewController {
                 performSegue(withIdentifier: Constants.segueIdentifier, sender: nil)
                 return true
             } else {
-                errorAlert(title: Constants.titleAlertText, message: Constants.messageAlertText)
+                showErrorAlert(title: Constants.titleAlertText, message: Constants.messageAlertText)
                 return false
             }
         }

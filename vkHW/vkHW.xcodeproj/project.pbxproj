@@ -13,7 +13,7 @@
 		711208AE2911D1BB00E7784A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 711208AC2911D1BB00E7784A /* LaunchScreen.storyboard */; };
 		711208B82911D30000E7784A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711208B72911D30000E7784A /* LoginViewController.swift */; };
 		711208BA2911D32100E7784A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 711208B92911D32100E7784A /* Main.storyboard */; };
-		71CA78362912FEC500A39980 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CA78352912FEC500A39980 /* ErrorAlert.swift */; };
+		71CA78362912FEC500A39980 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CA78352912FEC500A39980 /* UIViewController + Extension.swift */; };
 		71CA78382913054200A39980 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71CA78372913054200A39980 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +26,7 @@
 		711208AF2911D1BB00E7784A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		711208B72911D30000E7784A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		711208B92911D32100E7784A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		71CA78352912FEC500A39980 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
+		71CA78352912FEC500A39980 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		71CA78372913054200A39980 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,7 +76,7 @@
 		71CA78342912FE8200A39980 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				71CA78352912FEC500A39980 /* ErrorAlert.swift */,
+				71CA78352912FEC500A39980 /* UIViewController + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -196,7 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				711208B82911D30000E7784A /* LoginViewController.swift in Sources */,
-				71CA78362912FEC500A39980 /* ErrorAlert.swift in Sources */,
+				71CA78362912FEC500A39980 /* UIViewController + Extension.swift in Sources */,
 				711208A22911D1BA00E7784A /* AppDelegate.swift in Sources */,
 				711208A42911D1BA00E7784A /* SceneDelegate.swift in Sources */,
 			);
