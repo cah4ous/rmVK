@@ -7,14 +7,8 @@ import UIKit
 final class FriendsTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
 
-    @IBOutlet var avatarView: AvatarView!
-    @IBOutlet var nameLabel: UILabel!
-
-    // MARK: - Lifecycle
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+    @IBOutlet private var avatarView: AvatarView!
+    @IBOutlet private var nameLabel: UILabel!
 
     // MARK: - Public Methods
 

@@ -19,16 +19,6 @@ final class GroupTableViewController: UITableViewController {
         Group(name: "The swift developers", imageName: "0")
     ]
 
-    // MARK: - Lifeсycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

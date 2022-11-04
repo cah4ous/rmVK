@@ -46,14 +46,9 @@ class LikeControl: UIControl {
 
     // MARK: - Private Methods
 
-    @objc private func touchUpInside() {
-        if isLiked {
-            likeCount += 1
-            isLiked = false
-        } else {
-            likeCount -= 1
-            isLiked = true
-        }
+    @objc private func touchUpInsideAction() {
+        isLiked ? (likeCount += 1) : (likeCount -= 1)
+        isLiked = !isLiked
     }
 
     private func setupUI() {
@@ -70,7 +65,7 @@ class LikeControl: UIControl {
     }
 
     private func addTargets() {
-        addTarget(self, action: #selector(touchUpInside), for: .touchUpInside)
+        addTarget(self, action: #selector(touchUpInsideAction), for: .touchUpInside)
     }
 
     private func createConstraints() {

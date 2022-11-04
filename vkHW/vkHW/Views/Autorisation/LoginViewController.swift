@@ -19,9 +19,7 @@ final class LoginViewController: UIViewController {
     // MARK: - IBOutlets
 
     @IBOutlet private var loginTextField: UITextField!
-
     @IBOutlet private var passwordTextField: UITextField!
-
     @IBOutlet private var loginScrollView: UIScrollView!
 
     // MARK: - Lifecycle
@@ -76,12 +74,12 @@ final class LoginViewController: UIViewController {
         loginScrollView.scrollIndicatorInsets = contentInset
     }
 
-    @objc private func keyboardWillHide(notification: Notification) {
+    @objc private func keyboardWillHideAction(notification: Notification) {
         loginScrollView.contentInset = UIEdgeInsets.zero
         loginScrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
 
-    @objc private func hideKeyboard() {
+    @objc private func hideKeyboardAction() {
         loginScrollView.endEditing(true)
     }
 
@@ -99,14 +97,14 @@ final class LoginViewController: UIViewController {
 
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(keyboardWillHide(notification:)),
+            selector: #selector(keyboardWillHideAction(notification:)),
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
 
         let tapGesture = UITapGestureRecognizer(
             target: self,
-            action: #selector(hideKeyboard)
+            action: #selector(hideKeyboardAction)
         )
         loginScrollView.addGestureRecognizer(tapGesture)
     }

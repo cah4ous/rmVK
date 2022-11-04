@@ -4,7 +4,7 @@
 import UIKit
 
 /// Кастомизация аватарки пользователя
-class AvatarView: UIView {
+final class AvatarView: UIView {
     // MARK: - IBInspectable Properties
 
     @IBInspectable var shadowColor: UIColor = .darkGray {

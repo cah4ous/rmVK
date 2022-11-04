@@ -22,12 +22,6 @@ class FriendsTableViewController: UITableViewController {
         Friend(name: "Charles", avatarImageName: "0", likeCount: 23)
     ]
 
-    // MARK: - Lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -56,6 +50,6 @@ class FriendsTableViewController: UITableViewController {
               let friendsCollectionViewController = segue.destination as? FriendsCollectionViewController
         else { return }
         let informationIndex = tableView.indexPathForSelectedRow?.row ?? 0
-        friendsCollectionViewController.friendsPeople.append(friends[informationIndex])
+        friendsCollectionViewController.friends.append(friends[informationIndex])
     }
 }

@@ -13,7 +13,7 @@ final class FriendsCollectionViewController: UICollectionViewController {
 
     // MARK: - Public Properties
 
-    var friendsPeople: [Friend] = []
+    var friends: [Friend] = []
 
     // MARK: - LifeCycle
 
@@ -28,7 +28,7 @@ final class FriendsCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        friendsPeople.count
+        friends.count
     }
 
     override func collectionView(
@@ -41,8 +41,8 @@ final class FriendsCollectionViewController: UICollectionViewController {
         ) as? FriendsCollectionViewCell
         else { return FriendsCollectionViewCell() }
         cell.configure(
-            imageName: friendsPeople[indexPath.row].avatarImageName,
-            likesCount: friendsPeople[indexPath.row].likeCount
+            imageName: friends[indexPath.row].avatarImageName,
+            likesCount: friends[indexPath.row].likeCount
         )
         return cell
     }
