@@ -9,15 +9,33 @@ final class GroupTableViewController: UITableViewController {
 
     private enum Constants {
         static let groupCellIdentifier = "groupCell"
+        static let groupNameText = "The swift developers"
+        static let otherGroupNameText = "not The swift developers"
+        static let groupImageNameText = "0"
     }
+
+    // MARK: - Private IBOutlets
+
+    @IBOutlet private var searchBar: UISearchBar!
 
     // MARK: - Public Properties
 
     var groups: [Group] = [
-        Group(name: "The swift developers", imageName: "0"),
-        Group(name: "not The swift developers", imageName: "0"),
-        Group(name: "The swift developers", imageName: "0")
+        Group(name: Constants.groupNameText, imageName: Constants.groupImageNameText),
+        Group(name: Constants.otherGroupNameText, imageName: Constants.groupImageNameText),
+        Group(name: Constants.groupNameText, imageName: Constants.groupImageNameText)
     ]
+
+    // MARK: - Private Methods
+
+    private var searches: [Group]?
+
+    // MARK: - Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        searchBar.delegate = self
+    }
 
     // MARK: - Table view data source
 
@@ -47,6 +65,26 @@ final class GroupTableViewController: UITableViewController {
     ) {
         guard editingStyle == .delete else { return }
         groups.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .fade)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+}
+
+// UISearchBarDelegate
+extension GroupTableViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searches = groups
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        groups = searches ?? []
+        tableView.reloadData()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        groups = searches ?? []
+        if !searchText.isEmpty {
+            groups = groups.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        }
+        tableView.reloadData()
     }
 }
