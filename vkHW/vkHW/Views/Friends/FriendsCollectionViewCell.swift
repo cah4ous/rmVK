@@ -8,12 +8,12 @@ final class FriendsCollectionViewCell: UICollectionViewCell {
     // MARK: - Private IBOutlets
 
     @IBOutlet private var avatarPersonImageView: UIImageView!
-    @IBOutlet private var likeControl: LikeControl!
+    @IBOutlet private var likeControlView: LikeControl!
 
     // MARK: Public Methods
 
     func configure(imageName: String, likesCount: Int) {
         avatarPersonImageView.image = UIImage(named: imageName)
-        likeControl.likeCount = likesCount
+        likeControlView.likeCount = likesCount
     }
 }

@@ -29,7 +29,7 @@ class FriendsTableViewController: UITableViewController {
 
     // MARK: - Private Properties
 
-    private var friendsSections: [Character: [Friend]] = [:]
+    private var friendsSectionsDict: [Character: [Friend]] = [:]
     private var friendSectionsTitles: [Character] = []
 
     // MARK: - Lifecycle
@@ -52,11 +52,11 @@ class FriendsTableViewController: UITableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        friendsSections.count
+        friendsSectionsDict.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        friendsSections[friendSectionsTitles[section]]?.count ?? 0
+        friendsSectionsDict[friendSectionsTitles[section]]?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -64,7 +64,7 @@ class FriendsTableViewController: UITableViewController {
             withIdentifier: Constants.friendsCellIdentifier,
             for: indexPath
         ) as? FriendsTableViewCell,
-            let friend = friendsSections[friendSectionsTitles[indexPath.section]]?[indexPath.row]
+            let friend = friendsSectionsDict[friendSectionsTitles[indexPath.section]]?[indexPath.row]
         else { return UITableViewCell() }
 
         cell.configure(nameLabelText: friend.name, avatarImageName: friend.avatarImageName)
@@ -88,12 +88,12 @@ class FriendsTableViewController: UITableViewController {
     private func createFriendSections() {
         for friend in friends {
             guard let firstLetter = friend.name.first else { return }
-            if friendsSections[firstLetter] != nil {
-                friendsSections[firstLetter]?.append(friend)
+            if friendsSectionsDict[firstLetter] != nil {
+                friendsSectionsDict[firstLetter]?.append(friend)
             } else {
-                friendsSections[firstLetter] = [friend]
+                friendsSectionsDict[firstLetter] = [friend]
             }
         }
-        friendSectionsTitles = Array(friendsSections.keys).sorted()
+        friendSectionsTitles = Array(friendsSectionsDict.keys).sorted()
     }
 }

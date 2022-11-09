@@ -53,12 +53,12 @@ final class AvatarView: UIView {
             usingSpringWithDamping: 0.4,
             initialSpringVelocity: 0.5,
             options: [.autoreverse],
-            animations: { [self] in
+            animations: {
                 self.avatarImageView.bounds = CGRect(
-                    x: avatarImageView.bounds.origin.x,
-                    y: avatarImageView.bounds.origin.y,
-                    width: avatarImageView.bounds.width + 3,
-                    height: avatarImageView.bounds.height + 3
+                    x: self.avatarImageView.bounds.origin.x,
+                    y: self.avatarImageView.bounds.origin.y,
+                    width: self.avatarImageView.bounds.width + 3,
+                    height: self.avatarImageView.bounds.height + 3
                 )
             }
         )

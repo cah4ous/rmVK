@@ -5,7 +5,13 @@ import UIKit
 
 /// Анимированные точки
 final class LoadDotsView: UIView {
-    // MARK: Private Visual Components
+    // MARK: - Constants
+
+    private enum Constants {
+        static let keyPath = "opacity"
+    }
+
+    // MARK: - Private Visual Components
 
     private var dotsStackView: UIStackView?
     private lazy var pointViews: [UIView] = []
@@ -60,7 +66,7 @@ final class LoadDotsView: UIView {
     }
 
     private func makeOpacity(for view: UIView, delay: Double) {
-        let animation = CABasicAnimation(keyPath: "opacity")
+        let animation = CABasicAnimation(keyPath: Constants.keyPath)
         animation.fromValue = 1
         animation.toValue = 0.5
         animation.duration = 0.7
