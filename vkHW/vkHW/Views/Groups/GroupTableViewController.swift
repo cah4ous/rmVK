@@ -26,7 +26,7 @@ final class GroupTableViewController: UITableViewController {
         Group(name: Constants.groupNameText, imageName: Constants.groupImageNameText)
     ]
 
-    // MARK: - Private Methods
+    // MARK: - Private Properties
 
     private var searches: [Group]?
 
@@ -37,7 +37,7 @@ final class GroupTableViewController: UITableViewController {
         searchBar.delegate = self
     }
 
-    // MARK: - Table view data source
+    // MARK: - Public Methods
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         1

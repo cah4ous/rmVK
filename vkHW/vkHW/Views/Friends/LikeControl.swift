@@ -13,6 +13,11 @@ final class LikeControl: UIControl {
         static let heartFillImageName = "heart.fill"
     }
 
+    // MARK: - Private Visual Components
+
+    private var heartImageView = UIImageView()
+    private var likeCountLabel = UILabel()
+
     // MARK: - Public Properties
 
     var likeCount: Int = 0 {
@@ -32,11 +37,6 @@ final class LikeControl: UIControl {
             }
         }
     }
-
-    // MARK: - Private Properties
-
-    private var heartImageView = UIImageView()
-    private var likeCountLabel = UILabel()
 
     // MARK: - Initializers
 

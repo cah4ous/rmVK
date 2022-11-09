@@ -5,12 +5,12 @@ import UIKit
 
 /// Ячейка новостей
 final class NewsTableViewCell: UITableViewCell {
-    // MARK: - IBOutlets
+    // MARK: - Private IBOutlets
 
-    @IBOutlet var avatarImageView: UIImageView!
-    @IBOutlet var avatarNameLabel: UILabel!
-    @IBOutlet var postTextLabel: UILabel!
-    @IBOutlet var postImageView: UIImageView!
+    @IBOutlet private var avatarImageView: UIImageView!
+    @IBOutlet private var avatarNameLabel: UILabel!
+    @IBOutlet private var postTextLabel: UILabel!
+    @IBOutlet private var postImageView: UIImageView!
 
     // MARK: Public Methods
 

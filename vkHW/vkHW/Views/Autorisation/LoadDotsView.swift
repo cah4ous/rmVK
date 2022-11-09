@@ -26,6 +26,10 @@ final class LoadDotsView: UIView {
     // MARK: - Private Methods
 
     private func setupView() {
+        createDotaStackView()
+    }
+
+    private func createDotaStackView() {
         for _ in 0 ..< 3 {
             let view = UIView()
             view.backgroundColor = .systemBlue

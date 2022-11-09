@@ -5,10 +5,10 @@ import UIKit
 
 /// Ячейка персональных сведений друга
 final class FriendsCollectionViewCell: UICollectionViewCell {
-    // MARK: - IBOutlets
+    // MARK: - Private IBOutlets
 
-    @IBOutlet var avatarPersonImageView: UIImageView!
-    @IBOutlet var likeControl: LikeControl!
+    @IBOutlet private var avatarPersonImageView: UIImageView!
+    @IBOutlet private var likeControl: LikeControl!
 
     // MARK: Public Methods
 

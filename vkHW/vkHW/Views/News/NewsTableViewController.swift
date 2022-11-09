@@ -50,25 +50,7 @@ final class NewsTableViewController: UITableViewController {
         initMethods()
     }
 
-    // MARK: - Private Methods
-
-    private func initMethods() {
-        createTableViewSettings()
-    }
-
-    private func createTableViewSettings() {
-        tableView.delegate = self
-        tableView.dataSource = self
-
-        tableView.register(UINib(
-            nibName: Constants.cellIdentifier,
-            bundle: nil
-        ), forCellReuseIdentifier: Constants.cellIdentifier)
-
-        tableView.rowHeight = UITableView.automaticDimension
-    }
-
-    // MARK: - Table view data source
+    // MARK: - Public Methods
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         posts.count
@@ -85,5 +67,23 @@ final class NewsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         1
+    }
+
+    // MARK: - Private Methods
+
+    private func initMethods() {
+        createTableViewSettings()
+    }
+
+    private func createTableViewSettings() {
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        tableView.register(UINib(
+            nibName: Constants.cellIdentifier,
+            bundle: nil
+        ), forCellReuseIdentifier: Constants.cellIdentifier)
+
+        tableView.rowHeight = UITableView.automaticDimension
     }
 }

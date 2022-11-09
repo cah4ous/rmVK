@@ -5,6 +5,6 @@ import Foundation
 
 /// Группа
 struct Group {
-    var name: String
-    var imageName: String
+    let name: String
+    let imageName: String
 }

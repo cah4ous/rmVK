@@ -39,25 +39,7 @@ class FriendsTableViewController: UITableViewController {
         initMethods()
     }
 
-    // MARK: - Private Methods
-
-    private func initMethods() {
-        createFriendSections()
-    }
-
-    private func createFriendSections() {
-        for friend in friends {
-            guard let firstLetter = friend.name.first else { return }
-            if friendsSections[firstLetter] != nil {
-                friendsSections[firstLetter]?.append(friend)
-            } else {
-                friendsSections[firstLetter] = [friend]
-            }
-        }
-        friendSectionsTitles = Array(friendsSections.keys).sorted()
-    }
-
-    // MARK: - Table view data source
+    // MARK: - Public Methods
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         String(friendSectionsTitles[section])
@@ -66,7 +48,7 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let viewHeader = (view as? UITableViewHeaderFooterView) else { return }
         viewHeader.contentView.backgroundColor = UIColor(named: Constants.defaultBlack)
-        viewHeader.contentView.alpha = 0.4
+        viewHeader.contentView.alpha = 0.5
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -89,13 +71,29 @@ class FriendsTableViewController: UITableViewController {
         return cell
     }
 
-    // MARK: - Navigation
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == Constants.friendsSegueIdentifier,
               let friendsCollectionViewController = segue.destination as? FriendsCollectionViewController
         else { return }
         let informationIndex = tableView.indexPathForSelectedRow?.row ?? 0
         friendsCollectionViewController.friends.append(friends[informationIndex])
+    }
+
+    // MARK: - Private Methods
+
+    private func initMethods() {
+        createFriendSections()
+    }
+
+    private func createFriendSections() {
+        for friend in friends {
+            guard let firstLetter = friend.name.first else { return }
+            if friendsSections[firstLetter] != nil {
+                friendsSections[firstLetter]?.append(friend)
+            } else {
+                friendsSections[firstLetter] = [friend]
+            }
+        }
+        friendSectionsTitles = Array(friendsSections.keys).sorted()
     }
 }
