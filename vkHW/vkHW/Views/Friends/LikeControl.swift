@@ -4,7 +4,7 @@
 import UIKit
 
 ///  Контрол количества лайков
-class LikeControl: UIControl {
+final class LikeControl: UIControl {
     // MARK: - Constants
 
     private enum Constants {
@@ -12,6 +12,11 @@ class LikeControl: UIControl {
         static let heartImageName = "heart"
         static let heartFillImageName = "heart.fill"
     }
+
+    // MARK: - Private Visual Components
+
+    private var heartImageView = UIImageView()
+    private var likeCountLabel = UILabel()
 
     // MARK: - Public Properties
 
@@ -26,16 +31,12 @@ class LikeControl: UIControl {
             likeCountLabel.text = String(likeCount)
             if isLiked {
                 heartImageView.image = UIImage(systemName: Constants.heartImageName)
+
             } else {
                 heartImageView.image = UIImage(systemName: Constants.heartFillImageName)
             }
         }
     }
-
-    // MARK: - Private Properties
-
-    private var heartImageView = UIImageView()
-    private var likeCountLabel = UILabel()
 
     // MARK: - Initializers
 
@@ -48,6 +49,7 @@ class LikeControl: UIControl {
 
     @objc private func touchUpInsideAction() {
         isLiked ? (likeCount += 1) : (likeCount -= 1)
+        setupLikeAnimation()
         isLiked = !isLiked
     }
 
@@ -55,6 +57,15 @@ class LikeControl: UIControl {
         initMethods()
 
         backgroundColor = UIColor.clear
+    }
+
+    private func setupLikeAnimation() {
+        UIView.transition(
+            with: likeCountLabel,
+            duration: 1.0,
+            options: .transitionFlipFromBottom,
+            animations: nil
+        )
     }
 
     private func initMethods() {

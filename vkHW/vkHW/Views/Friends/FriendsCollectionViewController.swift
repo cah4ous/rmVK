@@ -21,7 +21,7 @@ final class FriendsCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
     }
 
-    // MARK: UICollectionViewDataSource
+    // MARK: Public Methods
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         1

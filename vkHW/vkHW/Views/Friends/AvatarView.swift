@@ -46,6 +46,24 @@ final class AvatarView: UIView {
 
     // MARK: - Private Methods
 
+    @objc private func animatePhotoAction() {
+        UIView.animate(
+            withDuration: 0.8,
+            delay: 0.0,
+            usingSpringWithDamping: 0.4,
+            initialSpringVelocity: 0.5,
+            options: [.autoreverse],
+            animations: {
+                self.avatarImageView.bounds = CGRect(
+                    x: self.avatarImageView.bounds.origin.x,
+                    y: self.avatarImageView.bounds.origin.y,
+                    width: self.avatarImageView.bounds.width + 3,
+                    height: self.avatarImageView.bounds.height + 3
+                )
+            }
+        )
+    }
+
     private func setupUI() {
         initMethods()
     }
@@ -53,6 +71,13 @@ final class AvatarView: UIView {
     private func initMethods() {
         settingsLayer()
         createAvatarImageView()
+        createPhotoAnimation()
+    }
+
+    private func createPhotoAnimation() {
+        let photoGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(animatePhotoAction))
+        avatarImageView.isUserInteractionEnabled = true
+        avatarImageView.addGestureRecognizer(photoGestureRecognizer)
     }
 
     private func createAvatarImageView() {

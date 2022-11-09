@@ -5,15 +5,15 @@ import UIKit
 
 /// Ячейка персональных сведений друга
 final class FriendsCollectionViewCell: UICollectionViewCell {
-    // MARK: - IBOutlets
+    // MARK: - Private IBOutlets
 
-    @IBOutlet var avatarPersonImageView: UIImageView!
-    @IBOutlet var likeControl: LikeControl!
+    @IBOutlet private var avatarPersonImageView: UIImageView!
+    @IBOutlet private var likeControlView: LikeControl!
 
     // MARK: Public Methods
 
     func configure(imageName: String, likesCount: Int) {
         avatarPersonImageView.image = UIImage(named: imageName)
-        likeControl.likeCount = likesCount
+        likeControlView.likeCount = likesCount
     }
 }

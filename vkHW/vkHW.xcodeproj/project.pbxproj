@@ -23,8 +23,13 @@
 		718515332914AD3E00944220 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718515322914AD3E00944220 /* FriendsTableViewCell.swift */; };
 		718515352914B44B00944220 /* FriendsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718515342914B44B00944220 /* FriendsCollectionViewController.swift */; };
 		718515372914B45F00944220 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718515362914B45F00944220 /* FriendsCollectionViewCell.swift */; };
+		71B001DB291B755600F250B4 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B001DA291B755600F250B4 /* NewsTableViewController.swift */; };
+		71B001DE291B75B000F250B4 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B001DC291B75B000F250B4 /* NewsTableViewCell.swift */; };
+		71B001DF291B75B000F250B4 /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71B001DD291B75B000F250B4 /* NewsTableViewCell.xib */; };
+		71B001E1291B82AD00F250B4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B001E0291B82AD00F250B4 /* Post.swift */; };
 		71CA78362912FEC500A39980 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CA78352912FEC500A39980 /* UIViewController + Extension.swift */; };
 		71CA78382913054200A39980 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71CA78372913054200A39980 /* Colors.xcassets */; };
+		71CFE853291C04DD00A4746C /* LoadDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CFE852291C04DD00A4746C /* LoadDotsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,8 +51,13 @@
 		718515322914AD3E00944220 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		718515342914B44B00944220 /* FriendsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewController.swift; sourceTree = "<group>"; };
 		718515362914B45F00944220 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
+		71B001DA291B755600F250B4 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
+		71B001DC291B75B000F250B4 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		71B001DD291B75B000F250B4 /* NewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
+		71B001E0291B82AD00F250B4 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		71CA78352912FEC500A39980 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		71CA78372913054200A39980 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		71CFE852291C04DD00A4746C /* LoadDotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadDotsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +110,7 @@
 				718515392914BD7900944220 /* Autorisation */,
 				718515382914BD6800944220 /* Friends */,
 				7185153A2914BD8A00944220 /* Groups */,
+				71B001D9291B752C00F250B4 /* News */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -109,6 +120,7 @@
 			children = (
 				718515302914ABDE00944220 /* Friend.swift */,
 				711BC6CE2914BF06004721F1 /* Group.swift */,
+				71B001E0291B82AD00F250B4 /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -130,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				711208B72911D30000E7784A /* LoginViewController.swift */,
+				71CFE852291C04DD00A4746C /* LoadDotsView.swift */,
 			);
 			path = Autorisation;
 			sourceTree = "<group>";
@@ -141,6 +154,16 @@
 				711BC6D22914C1B3004721F1 /* GroupTableViewCell.swift */,
 			);
 			path = Groups;
+			sourceTree = "<group>";
+		};
+		71B001D9291B752C00F250B4 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				71B001DA291B755600F250B4 /* NewsTableViewController.swift */,
+				71B001DC291B75B000F250B4 /* NewsTableViewCell.swift */,
+				71B001DD291B75B000F250B4 /* NewsTableViewCell.xib */,
+			);
+			path = News;
 			sourceTree = "<group>";
 		};
 		71CA78342912FE8200A39980 /* Extensions */ = {
@@ -215,6 +238,7 @@
 				71CA78382913054200A39980 /* Colors.xcassets in Resources */,
 				711208AB2911D1BB00E7784A /* Assets.xcassets in Resources */,
 				711208BA2911D32100E7784A /* Main.storyboard in Resources */,
+				71B001DF291B75B000F250B4 /* NewsTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,17 +291,21 @@
 			files = (
 				711208B82911D30000E7784A /* LoginViewController.swift in Sources */,
 				718515372914B45F00944220 /* FriendsCollectionViewCell.swift in Sources */,
+				71B001DE291B75B000F250B4 /* NewsTableViewCell.swift in Sources */,
 				711BC6D72914D8A0004721F1 /* LikeControl.swift in Sources */,
+				71B001E1291B82AD00F250B4 /* Post.swift in Sources */,
 				71CA78362912FEC500A39980 /* UIViewController + Extension.swift in Sources */,
 				711BC6D32914C1B3004721F1 /* GroupTableViewCell.swift in Sources */,
 				711BC6D52914D84E004721F1 /* AvatarView.swift in Sources */,
 				711BC6CF2914BF06004721F1 /* Group.swift in Sources */,
 				711208A22911D1BA00E7784A /* AppDelegate.swift in Sources */,
+				71B001DB291B755600F250B4 /* NewsTableViewController.swift in Sources */,
 				718515332914AD3E00944220 /* FriendsTableViewCell.swift in Sources */,
 				718515312914ABDE00944220 /* Friend.swift in Sources */,
 				711208A42911D1BA00E7784A /* SceneDelegate.swift in Sources */,
 				718515352914B44B00944220 /* FriendsCollectionViewController.swift in Sources */,
 				7185152B2914AB3200944220 /* FriendsTableViewController.swift in Sources */,
+				71CFE853291C04DD00A4746C /* LoadDotsView.swift in Sources */,
 				711BC6D12914BF48004721F1 /* GroupTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

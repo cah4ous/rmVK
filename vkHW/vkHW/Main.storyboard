@@ -79,6 +79,11 @@
                                             <action selector="logInButtonAction:" destination="ZQd-nU-wDH" eventType="touchUpInside" id="p0v-nu-ibH"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mdq-gC-dcw" customClass="LoadDotsView" customModule="vkHW" customModuleProvider="target">
+                                        <rect key="frame" x="129" y="121" width="142" height="49"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" name="defaultGreen"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="DUG-jB-ogf" firstAttribute="centerX" secondItem="iT8-PH-AiV" secondAttribute="centerX" id="6WD-UM-uBu"/>
@@ -210,9 +215,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="neL-YU-qdO">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupCell" id="0Gb-tJ-Z2n" customClass="GroupTableViewCell" customModule="vkHW" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="88.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Gb-tJ-Z2n" id="dco-hz-ruV">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -249,6 +259,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="neL-YU-qdO" id="x6y-Mm-a5b"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7m-3m-wFC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -283,11 +296,11 @@
             </objects>
             <point key="canvasLocation" x="4742" y="417"/>
         </scene>
-        <!--Item-->
+        <!-- Группы-->
         <scene sceneID="Vdg-br-MgN">
             <objects>
                 <navigationController id="ILN-N2-Ep9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="5Kl-PU-NvL"/>
+                    <tabBarItem key="tabBarItem" title=" Группы" id="5Kl-PU-NvL"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MmI-R8-jGZ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -367,11 +380,57 @@
             </objects>
             <point key="canvasLocation" x="4742.0289855072469" y="-227.00892857142856"/>
         </scene>
-        <!--Item-->
+        <!--Новости-->
+        <scene sceneID="c4v-kc-hPJ">
+            <objects>
+                <tableViewController id="HcG-6P-jnC" customClass="NewsTableViewController" customModule="vkHW" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Jqs-fA-Srm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="vqJ-WQ-KIi">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vqJ-WQ-KIi" id="hsi-8o-gY1">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="HcG-6P-jnC" id="vLm-03-zRc"/>
+                            <outlet property="delegate" destination="HcG-6P-jnC" id="2cI-zL-huh"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Новости" id="3tQ-4X-Gam"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Has-Bh-iCt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3919" y="-893"/>
+        </scene>
+        <!--Новости-->
+        <scene sceneID="WU6-la-wIK">
+            <objects>
+                <navigationController id="rQQ-sr-gGr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Новости" id="fe8-yD-bz7"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tiu-1z-V5A">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="HcG-6P-jnC" kind="relationship" relationship="rootViewController" id="5GF-kE-HTK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lXb-AU-fx8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3029" y="-893"/>
+        </scene>
+        <!--Друзья-->
         <scene sceneID="a4n-Jd-dbH">
             <objects>
                 <navigationController id="YpM-du-bYG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ObH-Fx-Hen"/>
+                    <tabBarItem key="tabBarItem" title="Друзья" id="ObH-Fx-Hen"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zy4-IV-iWs">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -397,6 +456,7 @@
                     <connections>
                         <segue destination="YpM-du-bYG" kind="relationship" relationship="viewControllers" id="8xo-hM-guG"/>
                         <segue destination="ILN-N2-Ep9" kind="relationship" relationship="viewControllers" id="R8b-Hz-zfq"/>
+                        <segue destination="rQQ-sr-gGr" kind="relationship" relationship="viewControllers" id="5pL-Gp-59I"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZY-zd-AHN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -412,6 +472,9 @@
         </namedColor>
         <namedColor name="defaultGray">
             <color red="0.88200002908706665" green="0.88599997758865356" blue="0.90200001001358032" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="defaultGreen">
+            <color red="0.40400001406669617" green="0.68999999761581421" blue="0.34099999070167542" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="defaultTextColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

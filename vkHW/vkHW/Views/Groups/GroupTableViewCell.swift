@@ -5,7 +5,7 @@ import UIKit
 
 /// Ячейка группы
 final class GroupTableViewCell: UITableViewCell {
-    // MARK: - IBOutlets
+    // MARK: - Private IBOutlets
 
     @IBOutlet private var groupImageView: UIImageView!
     @IBOutlet private var groupNameLabel: UILabel!

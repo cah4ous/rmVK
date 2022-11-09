@@ -3,9 +3,9 @@
 
 import Foundation
 
-/// Сведения о друге
+/// Друг
 struct Friend {
-    var name: String
-    var avatarImageName: String
-    var likeCount: Int
+    let name: String
+    let avatarImageName: String
+    let likeCount: Int
 }
