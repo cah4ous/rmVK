@@ -5,14 +5,19 @@ import UIKit
 
 /// Экран изображений
 final class FriendPhotoViewController: UIViewController {
+    // MARK: - Constants
+    private enum Constants {
+        static let firstPhotoImageName = "0"
+        static let secondPhotoImageName = "vkImage"
+    }
     // MARK: - IBOutlets
 
     @IBOutlet var friendImageView: UIImageView!
 
     // MARK: - Public Properties
 
-    var photo = [UIImage(named: "0"), UIImage(named: "vkImage"), UIImage(named: "0"), UIImage(named: "vkImage")]
-    var navController: CustomNavigationController?
+    var photo = [UIImage(named: Constants.firstPhotoImageName), UIImage(named: Constants.secondPhotoImageName), UIImage(named: Constants.firstPhotoImageName), UIImage(named: Constants.secondPhotoImageName)]
+    var navController: UINavigationController?
 
     // MARK: Private Properties
 

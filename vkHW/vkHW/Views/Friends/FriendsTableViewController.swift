@@ -9,7 +9,7 @@ class FriendsTableViewController: UITableViewController {
 
     private enum Constants {
         static let friendsCellIdentifier = "friendsCell"
-        static let friendsSegueIdentifier = "friendsSegue"
+        static let friendsVCIdentifier = "mainInfoFriendID"
         static let defaultBlack = "defaultBlack"
         static let firstPersonName = "Oleg"
         static let secondPersonName = "Alex"
@@ -61,7 +61,7 @@ class FriendsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let nextVC = storyboard?
-            .instantiateViewController(identifier: "mainInfoFriendID") as? FriendPhotoViewController
+            .instantiateViewController(identifier: Constants.friendsVCIdentifier) as? FriendPhotoViewController
         else { return }
         navigationController?.pushViewController(nextVC, animated: true)
     }
