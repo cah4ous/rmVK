@@ -5,6 +5,7 @@ import UIKit
 
 /// Анимации пуша
 final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    // MARK: - Constants
     private enum Constants {
         static let translationX = -200.0
         static let relativeDuration = 0.5
