@@ -54,7 +54,7 @@ final class LoginViewController: UIViewController {
         return false
     }
 
-    // MARK: - Private IBActions
+    // MARK: - IBActions
 
     @IBAction private func goToVCAction(_ sender: Any) {
         shouldPerformSegue(withIdentifier: Constants.segueIdentifier, sender: nil)

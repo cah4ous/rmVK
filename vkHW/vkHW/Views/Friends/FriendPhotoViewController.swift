@@ -12,26 +12,47 @@ final class FriendPhotoViewController: UIViewController {
     }
     // MARK: - IBOutlets
 
-    @IBOutlet var friendImageView: UIImageView!
+    @IBOutlet private var friendImageView: UIImageView!
 
     // MARK: - Public Properties
 
     var photo = [UIImage(named: Constants.firstPhotoImageName), UIImage(named: Constants.secondPhotoImageName), UIImage(named: Constants.firstPhotoImageName), UIImage(named: Constants.secondPhotoImageName)]
     var navController: UINavigationController?
 
-    // MARK: Private Properties
+    // MARK: - Private Properties
 
     private var index = Int()
 
-    // MARK: Lifecycle
+    // MARK:  - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        friendImageView.isUserInteractionEnabled = true
-        createSwipeGestureRecognizer()
+        initMethods()
     }
 
     // MARK: Private Methods
+    
+    @objc private func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizer.Direction.left:
+                swipe(translationX: -500, increaseIndex: 1)
+            case UISwipeGestureRecognizer.Direction.right:
+                swipe(translationX: 500, increaseIndex: -1)
+            case UISwipeGestureRecognizer.Direction.down:
+                swipeDown()
+            default: break
+            }
+        }
+    }
+    
+    private func initMethods() {
+        createSwipeGestureRecognizer()
+    }
+    
+    private func createSettingsFriendImageView() {
+        friendImageView.isUserInteractionEnabled = true
+    }
 
     private func createSwipeGestureRecognizer() {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
@@ -45,20 +66,6 @@ final class FriendPhotoViewController: UIViewController {
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
         swipeDown.direction = UISwipeGestureRecognizer.Direction.down
         friendImageView.addGestureRecognizer(swipeDown)
-    }
-
-    @objc private func respondToSwipeGesture(gesture: UIGestureRecognizer) {
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            switch swipeGesture.direction {
-            case UISwipeGestureRecognizer.Direction.left:
-                swipe(translationX: -500, increaseIndex: 1)
-            case UISwipeGestureRecognizer.Direction.right:
-                swipe(translationX: 500, increaseIndex: -1)
-            case UISwipeGestureRecognizer.Direction.down:
-                swipeDown()
-            default: break
-            }
-        }
     }
 
     private func swipe(translationX: Int, increaseIndex: Int) {
