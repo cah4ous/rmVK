@@ -5,7 +5,11 @@ import UIKit
 
 /// Настройка переходов
 final class CustomInteractiveTransition: UIPercentDrivenInteractiveTransition {
-    // MARK: Public Properties
+    // MARK: - Constants
+    private enum Constants {
+        static let progressValue = 0.33
+    }
+    // MARK: - Public Properties
 
     var viewController: UIViewController? {
         didSet {
@@ -17,11 +21,11 @@ final class CustomInteractiveTransition: UIPercentDrivenInteractiveTransition {
 
     var isStarted = false
 
-    // MARK: Private properties
+    // MARK: - Private properties
 
     private var isFinish = false
 
-    // MARK: Private methods
+    // MARK: - Private methods
 
     @objc private func handlerAction(sender: UIScreenEdgePanGestureRecognizer) {
         switch sender.state {
@@ -32,7 +36,7 @@ final class CustomInteractiveTransition: UIPercentDrivenInteractiveTransition {
             let translation = sender.translation(in: sender.view)
             let relative = translation.y / (sender.view?.bounds.width ?? 1)
             let progress = max(0, min(1, relative))
-            isFinish = progress > 0.33
+            isFinish = progress > Constants.progressValue
             update(progress)
         case .ended:
             isStarted = false

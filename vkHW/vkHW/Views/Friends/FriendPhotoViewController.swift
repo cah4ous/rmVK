@@ -16,7 +16,12 @@ final class FriendPhotoViewController: UIViewController {
 
     // MARK: - Public Properties
 
-    var photo = [UIImage(named: Constants.firstPhotoImageName), UIImage(named: Constants.secondPhotoImageName), UIImage(named: Constants.firstPhotoImageName), UIImage(named: Constants.secondPhotoImageName)]
+    var photo = [UIImage(named: Constants.firstPhotoImageName),
+                 UIImage(named: Constants.secondPhotoImageName),
+                 UIImage(named: Constants.firstPhotoImageName),
+                 UIImage(named: Constants.secondPhotoImageName)
+    ]
+    
     var navController: UINavigationController?
 
     // MARK: - Private Properties

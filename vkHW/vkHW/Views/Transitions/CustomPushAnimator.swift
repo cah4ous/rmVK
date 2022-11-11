@@ -5,6 +5,11 @@ import UIKit
 
 /// Анимации пуша
 final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+    private enum Constants {
+        static let translationX = -200.0
+        static let relativeDuration = 0.5
+        static let defaultScale = 0.8
+    }
     // MARK: - Public Methods
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -36,13 +41,13 @@ final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning 
             delay: 0,
             options: .calculationModePaced
         ) {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5) {
-                let translation = CGAffineTransform(translationX: -200, y: 0)
-                let scale = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: Constants.relativeDuration) {
+                let translation = CGAffineTransform(translationX: Constants.translationX, y: 0)
+                let scale = CGAffineTransform(scaleX: Constants.defaultScale, y: Constants.defaultScale)
                 source.view.transform = translation.concatenating(scale)
             }
 
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5) {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: Constants.relativeDuration) {
                 destination.view.transform = .identity
                 destination.view.center = source.view.center
             }
