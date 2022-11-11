@@ -59,6 +59,13 @@ class FriendsTableViewController: UITableViewController {
         friendsSectionsDict[friendSectionsTitles[section]]?.count ?? 0
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let nextVC = storyboard?
+            .instantiateViewController(identifier: "mainInfoFriendID") as? FriendPhotoViewController
+        else { return }
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: Constants.friendsCellIdentifier,
@@ -69,14 +76,6 @@ class FriendsTableViewController: UITableViewController {
 
         cell.configure(nameLabelText: friend.name, avatarImageName: friend.avatarImageName)
         return cell
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == Constants.friendsSegueIdentifier,
-              let friendsCollectionViewController = segue.destination as? FriendsCollectionViewController
-        else { return }
-        let informationIndex = tableView.indexPathForSelectedRow?.row ?? 0
-        friendsCollectionViewController.friends.append(friends[informationIndex])
     }
 
     // MARK: - Private Methods
