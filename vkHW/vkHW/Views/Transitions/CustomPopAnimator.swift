@@ -3,14 +3,15 @@
 
 import UIKit
 
-/// Анимации попа
+/// Кастомный переход назад, замена стандартного pop
 final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     // MARK: - Constants
+
     private enum Constants {
         static let relativeDuration = 0.4
         static let defaultScale = 0.7
     }
-    
+
     // MARK: - Public Methods
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -34,6 +35,14 @@ final class CustomPopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             y: source.view.center.y
         )
 
+        createAnimateKeyFrames(transitionContext: transitionContext, source: source, destination: destination)
+    }
+
+    private func createAnimateKeyFrames(
+        transitionContext: UIViewControllerContextTransitioning,
+        source: UIViewController,
+        destination: UIViewController
+    ) {
         UIView.animateKeyframes(
             withDuration: transitionDuration(using: transitionContext),
             delay: 0,

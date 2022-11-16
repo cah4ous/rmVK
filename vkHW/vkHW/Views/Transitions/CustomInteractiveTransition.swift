@@ -6,9 +6,11 @@ import UIKit
 /// Настройка переходов
 final class CustomInteractiveTransition: UIPercentDrivenInteractiveTransition {
     // MARK: - Constants
+
     private enum Constants {
         static let progressValue = 0.33
     }
+
     // MARK: - Public Properties
 
     var viewController: UIViewController? {

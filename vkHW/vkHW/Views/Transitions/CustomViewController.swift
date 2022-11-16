@@ -13,16 +13,6 @@ final class CustomNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initMethods()
-    }
-
-    // MARK: - Private methods
-
-    private func initMethods() {
-        setDelegate()
-    }
-
-    private func setDelegate() {
         delegate = self
     }
 }

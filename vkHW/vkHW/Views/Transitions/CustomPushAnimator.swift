@@ -3,14 +3,16 @@
 
 import UIKit
 
-/// Анимации пуша
+/// Кастомный переход вперед, замена стандартного push
 final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     // MARK: - Constants
+
     private enum Constants {
         static let translationX = -200.0
         static let relativeDuration = 0.5
         static let defaultScale = 0.8
     }
+
     // MARK: - Public Methods
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -36,7 +38,14 @@ final class CustomPushAnimator: NSObject, UIViewControllerAnimatedTransitioning 
             x: source.view.bounds.width + source.view.bounds.height / 2,
             y: source.view.bounds.width / 2
         )
+        createAnimateKeyFrames(transitionContext: transitionContext, source: source, destination: destination)
+    }
 
+    private func createAnimateKeyFrames(
+        transitionContext: UIViewControllerContextTransitioning,
+        source: UIViewController,
+        destination: UIViewController
+    ) {
         UIView.animateKeyframes(
             withDuration: transitionDuration(using: transitionContext),
             delay: 0,
