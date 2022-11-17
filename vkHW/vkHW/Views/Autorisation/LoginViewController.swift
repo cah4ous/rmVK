@@ -56,7 +56,7 @@ final class LoginViewController: UIViewController {
 
     // MARK: - IBActions
 
-    @IBAction private func logInButtonAction(_ sender: Any) {
+    @IBAction private func goToVCAction(_ sender: Any) {
         shouldPerformSegue(withIdentifier: Constants.segueIdentifier, sender: nil)
     }
 

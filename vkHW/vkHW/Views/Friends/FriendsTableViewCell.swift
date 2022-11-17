@@ -5,7 +5,7 @@ import UIKit
 
 /// Ячейка друга
 final class FriendsTableViewCell: UITableViewCell {
-    // MARK: - IBOutlets
+    // MARK: - Private IBOutlets
 
     @IBOutlet private var avatarView: AvatarView!
     @IBOutlet private var nameLabel: UILabel!
