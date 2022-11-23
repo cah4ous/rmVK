@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Друг из ВК
+/// Информация о друге
 struct VKFriend: Codable {
     let id: Int
     let photoThumb: String
