@@ -1,9 +1,13 @@
-// Response.swift
-// Copyright © RoadMap. All rights reserved.
+//
+//  Response.swift
+//  vkHW
+//
+//  Created by Александр Троицкий on 23.11.2022.
+//
 
 import Foundation
 
-/// ответ от ВК
+/// Полученный ответ от ВК
 struct VKAPIResponse: Codable {
     let response: VKResponse
 }
