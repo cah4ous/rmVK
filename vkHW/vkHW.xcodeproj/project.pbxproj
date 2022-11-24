@@ -39,6 +39,8 @@
 		71DD22FE292E163F002DEDD4 /* AutorisationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DD22FD292E163F002DEDD4 /* AutorisationViewController.swift */; };
 		71FB7B52292E56FE0062CC6E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB7B51292E56FE0062CC6E /* Session.swift */; };
 		71FB7B59292E5CF50062CC6E /* VKAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB7B58292E5CF50062CC6E /* VKAPIService.swift */; };
+		71FF6A03292F7CC100C036A4 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FF6A02292F7CC100C036A4 /* NetworkRequest.swift */; };
+		71FF6A05292F7D3200C036A4 /* LoadNetworkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FF6A04292F7D3200C036A4 /* LoadNetworkData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,8 @@
 		71DD22FD292E163F002DEDD4 /* AutorisationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutorisationViewController.swift; sourceTree = "<group>"; };
 		71FB7B51292E56FE0062CC6E /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		71FB7B58292E5CF50062CC6E /* VKAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAPIService.swift; sourceTree = "<group>"; };
+		71FF6A02292F7CC100C036A4 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		71FF6A04292F7D3200C036A4 /* LoadNetworkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadNetworkData.swift; sourceTree = "<group>"; };
 		8C39666BBDF17B6036168EF9 /* Pods-vkHW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vkHW.debug.xcconfig"; path = "Target Support Files/Pods-vkHW/Pods-vkHW.debug.xcconfig"; sourceTree = "<group>"; };
 		C200244E5FF75F582D5D00CC /* Pods_vkHW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vkHW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -234,6 +238,8 @@
 			isa = PBXGroup;
 			children = (
 				71FB7B58292E5CF50062CC6E /* VKAPIService.swift */,
+				71FF6A02292F7CC100C036A4 /* NetworkRequest.swift */,
+				71FF6A04292F7D3200C036A4 /* LoadNetworkData.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -414,11 +420,13 @@
 				7170FC97291E5B8900069CF2 /* CustomViewController.swift in Sources */,
 				711208A42911D1BA00E7784A /* SceneDelegate.swift in Sources */,
 				7170FC91291E5AA400069CF2 /* CustomInteractiveTransition.swift in Sources */,
+				71FF6A05292F7D3200C036A4 /* LoadNetworkData.swift in Sources */,
 				71A37B37292E67A600744CF2 /* VKFriend.swift in Sources */,
 				71FB7B52292E56FE0062CC6E /* Session.swift in Sources */,
 				7185152B2914AB3200944220 /* FriendsTableViewController.swift in Sources */,
 				71CFE853291C04DD00A4746C /* LoadDotsView.swift in Sources */,
 				71FB7B59292E5CF50062CC6E /* VKAPIService.swift in Sources */,
+				71FF6A03292F7CC100C036A4 /* NetworkRequest.swift in Sources */,
 				711BC6D12914BF48004721F1 /* GroupTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,24 +11,6 @@ final class AutorisationViewController: UIViewController {
     private enum Constants {
         static let accessToken = "access_token"
         static let userID = "user_id"
-        static let schemaValue = "https"
-        static let hostValue = "oauth.vk.com"
-        static let pathValue = "/authorize"
-        static let blankPathValue = "/blank.html"
-        static let clientIdFieldName = "client_id"
-        static let clientIdValue = "51468498"
-        static let displayFieldName = "display"
-        static let displayValue = "mobile"
-        static let redirectUrlFieldName = "redirect_url"
-        static let redirectUrlValue = "https://oauth.vk.com/blank.html"
-        static let scopeFieldName = "scope"
-        static let scopeValue = "262150"
-        static let respondeTypeFieldName = "response_type"
-        static let respondeTypeValue = "token"
-        static let versionFieldName = "v"
-        static let versionValue = "5.68"
-        static let equalSign = "="
-        static let appersandSign = "&"
     }
 
     // MARK: - IBOutlets
@@ -53,22 +35,14 @@ final class AutorisationViewController: UIViewController {
 
     // MARK: - Private methods
 
-    private func initMethods() {
-        loadInfo()
-    }
-
-    private func loadPage() {
-        guard let url = vkAPIService.loadAuthPage() else { return }
-        let request = URLRequest(url: url)
-
+    private func showAuthorizationWebView() {
+        guard let authorizationURL = URL(string: NetworkRequests.authorization.urlPath) else { return }
+        let request = URLRequest(url: authorizationURL)
         wkWebView.load(request)
     }
 
-    private func loadInfo() {
-        loadPage()
-        vkAPIService.fetchMyPhotos()
-//        vkAPIService.fetchMyGroups()
-//        vkAPIService.loadMyFriends()
+    private func initMethods() {
+        showAuthorizationWebView()
     }
 }
 
@@ -106,7 +80,7 @@ extension AutorisationViewController: WKNavigationDelegate {
         Session.shared.token = token
         Session.shared.userID = userID
 
-        wkWebView.removeFromSuperview()
+        vkAPIService.printAllData()
         decisionHandler(.cancel)
     }
 }
