@@ -1,9 +1,5 @@
-//
-//  Response.swift
-//  vkHW
-//
-//  Created by Александр Троицкий on 23.11.2022.
-//
+// Response.swift
+// Copyright © RoadMap. All rights reserved.
 
 import Foundation
 

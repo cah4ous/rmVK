@@ -38,7 +38,7 @@
 		71CFE853291C04DD00A4746C /* LoadDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CFE852291C04DD00A4746C /* LoadDotsView.swift */; };
 		71DD22FE292E163F002DEDD4 /* AutorisationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DD22FD292E163F002DEDD4 /* AutorisationViewController.swift */; };
 		71FB7B52292E56FE0062CC6E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB7B51292E56FE0062CC6E /* Session.swift */; };
-		71FB7B59292E5CF50062CC6E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB7B58292E5CF50062CC6E /* NetworkService.swift */; };
+		71FB7B59292E5CF50062CC6E /* VKAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB7B58292E5CF50062CC6E /* VKAPIService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +75,7 @@
 		71CFE852291C04DD00A4746C /* LoadDotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadDotsView.swift; sourceTree = "<group>"; };
 		71DD22FD292E163F002DEDD4 /* AutorisationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutorisationViewController.swift; sourceTree = "<group>"; };
 		71FB7B51292E56FE0062CC6E /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		71FB7B58292E5CF50062CC6E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		71FB7B58292E5CF50062CC6E /* VKAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKAPIService.swift; sourceTree = "<group>"; };
 		8C39666BBDF17B6036168EF9 /* Pods-vkHW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vkHW.debug.xcconfig"; path = "Target Support Files/Pods-vkHW/Pods-vkHW.debug.xcconfig"; sourceTree = "<group>"; };
 		C200244E5FF75F582D5D00CC /* Pods_vkHW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vkHW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -233,7 +233,7 @@
 		71FB7B55292E57500062CC6E /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
-				71FB7B58292E5CF50062CC6E /* NetworkService.swift */,
+				71FB7B58292E5CF50062CC6E /* VKAPIService.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -418,7 +418,7 @@
 				71FB7B52292E56FE0062CC6E /* Session.swift in Sources */,
 				7185152B2914AB3200944220 /* FriendsTableViewController.swift in Sources */,
 				71CFE853291C04DD00A4746C /* LoadDotsView.swift in Sources */,
-				71FB7B59292E5CF50062CC6E /* NetworkService.swift in Sources */,
+				71FB7B59292E5CF50062CC6E /* VKAPIService.swift in Sources */,
 				711BC6D12914BF48004721F1 /* GroupTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -3,15 +3,15 @@
 
 import Foundation
 
-/// Сохранение информации о юзере
+/// Информация о сессии юзера
 final class Session {
-    
     // MARK: - Public Properties
-    
+
     static let shared = Session()
-    var userId = ""
+    var userID = ""
     var token = ""
 
     // MARK: - Initializers
+
     private init() {}
 }

@@ -10,7 +10,7 @@ final class AutorisationViewController: UIViewController {
 
     private enum Constants {
         static let accessToken = "access_token"
-        static let userId = "user_id"
+        static let userID = "user_id"
         static let schemaValue = "https"
         static let hostValue = "oauth.vk.com"
         static let pathValue = "/authorize"
@@ -33,7 +33,7 @@ final class AutorisationViewController: UIViewController {
 
     // MARK: - IBOutlets
 
-    @IBOutlet var wkWebView: WKWebView! {
+    @IBOutlet private var wkWebView: WKWebView! {
         didSet {
             wkWebView.navigationDelegate = self
         }
@@ -42,7 +42,7 @@ final class AutorisationViewController: UIViewController {
     // MARK: - Private Properties
 
     private var session = Session.shared
-    private var apiService = VKAPIService()
+    private var vkAPIService = VKAPIService()
 
     // MARK: - Lifecycle
 
@@ -54,37 +54,26 @@ final class AutorisationViewController: UIViewController {
     // MARK: - Private methods
 
     private func initMethods() {
-        loadAuthPage()
         loadInfo()
     }
 
-    private func loadInfo() {
-        apiService.loadMyPhotos()
-        apiService.loadMyGroups()
-        apiService.loadMyFriends()
-    }
-
-    private func loadAuthPage() {
-        var urlComponents = URLComponents()
-        urlComponents.scheme = Constants.schemaValue
-        urlComponents.host = Constants.hostValue
-        urlComponents.path = Constants.pathValue
-        urlComponents.queryItems = [
-            URLQueryItem(name: Constants.clientIdFieldName, value: Constants.clientIdValue),
-            URLQueryItem(name: Constants.displayFieldName, value: Constants.displayValue),
-            URLQueryItem(name: Constants.redirectUrlFieldName, value: Constants.redirectUrlValue),
-            URLQueryItem(name: Constants.scopeFieldName, value: Constants.scopeValue),
-            URLQueryItem(name: Constants.respondeTypeFieldName, value: Constants.respondeTypeValue),
-            URLQueryItem(name: Constants.versionFieldName, value: Constants.versionValue)
-        ]
-        guard let url = urlComponents.url else { return }
+    private func loadPage() {
+        guard let url = vkAPIService.loadAuthPage() else { return }
         let request = URLRequest(url: url)
 
         wkWebView.load(request)
     }
+
+    private func loadInfo() {
+        loadPage()
+        vkAPIService.fetchMyPhotos()
+//        vkAPIService.fetchMyGroups()
+//        vkAPIService.loadMyFriends()
+    }
 }
 
 // MARK: - WKNavigationDelegate
+
 extension AutorisationViewController: WKNavigationDelegate {
     func webView(
         _ webView: WKWebView,
@@ -108,14 +97,14 @@ extension AutorisationViewController: WKNavigationDelegate {
             }
 
         guard let token = params[Constants.accessToken],
-              let userId = params[Constants.userId]
+              let userID = params[Constants.userID]
         else {
             decisionHandler(.allow)
             return
         }
 
         Session.shared.token = token
-        Session.shared.userId = userId
+        Session.shared.userID = userID
 
         wkWebView.removeFromSuperview()
         decisionHandler(.cancel)
