@@ -20,7 +20,7 @@ final class LikeControl: UIControl {
 
     // MARK: - Public Properties
 
-    var likeCount: Int = 0 {
+    var likeCount = 0 {
         didSet {
             likeCountLabel.text = String(likeCount)
         }
