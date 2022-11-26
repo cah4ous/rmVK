@@ -5,7 +5,7 @@ import Alamofire
 import Foundation
 
 /// Апи запросы
-class VKAPIService {
+final class VKAPIService {
     // MARK: - Private Constants
 
     private enum Constants {

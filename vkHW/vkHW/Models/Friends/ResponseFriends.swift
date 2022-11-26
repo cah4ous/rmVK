@@ -1,7 +1,6 @@
 // ResponseFriends.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
 import RealmSwift
 
 /// Ответ пользователи
@@ -23,7 +22,7 @@ struct Users: Decodable {
 }
 
 /// Пользователь
-class User: Object, Decodable {
+final class User: Object, Decodable {
     @objc dynamic var id: Int
     @objc dynamic var firstName: String
     @objc dynamic var lastName: String

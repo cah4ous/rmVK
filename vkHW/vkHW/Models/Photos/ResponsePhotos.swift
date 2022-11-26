@@ -1,7 +1,6 @@
 // ResponsePhotos.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
 import RealmSwift
 
 /// Ответ все фото пользователя
