@@ -11,7 +11,7 @@ enum NetworkRequests {
         static let baseURL = "https://api.vk.com/method/"
         static let authorizeBaseURL = "https://oauth.vk.com/authorize"
         static let accessToken = "?access_token="
-        static let friendFields = "&fields=nickname"
+        static let friendFields = "&fields=nickname,photo_100,city"
         static let version = "&v=5.131"
         static let withExtendedParam = "&extended=1"
         static let ownerIdParam = "&owner_id="
@@ -24,7 +24,7 @@ enum NetworkRequests {
         static let redirectURI = "redirect_uri"
         static let redirectValue = "https://oauth.vk.com/blank.html"
         static let clientID = "?client_id="
-        static let clientIDValue = "51468498"
+        static let clientIDValue = "7915010"
         static let display = "&display="
         static let displayValue = "mobile"
         static let scope = "&scope="
@@ -37,7 +37,6 @@ enum NetworkRequests {
     case friends
     case photos(userID: String)
     case groups(userID: String)
-    case globalGroups(query: String)
 
     // MARK: - Public Properties
 
@@ -52,9 +51,6 @@ enum NetworkRequests {
                 .withExtendedParam
         case let .groups(userID):
             return baseURLWithMethod(Constants.groupsRequest) + Constants.userIdParam + userID + Constants
-                .withExtendedParam
-        case let .globalGroups(query):
-            return baseURLWithMethod(Constants.globalGroupsRequest) + Constants.queryParam + query + Constants
                 .withExtendedParam
         }
     }

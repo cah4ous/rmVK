@@ -11,6 +11,8 @@ final class AutorisationViewController: UIViewController {
     private enum Constants {
         static let accessToken = "access_token"
         static let userID = "user_id"
+        static let segueIdentifier = "menuVC"
+        static let urlPath = "/blank.html"
     }
 
     // MARK: - IBOutlets
@@ -26,6 +28,8 @@ final class AutorisationViewController: UIViewController {
     private var session = Session.shared
     private var vkAPIService = VKAPIService()
 
+    private var users: [User] = []
+
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -33,7 +37,7 @@ final class AutorisationViewController: UIViewController {
         initMethods()
     }
 
-    // MARK: - Private methods
+    // MARK: - Private Methods
 
     private func showAuthorizationWebView() {
         guard let authorizationURL = URL(string: NetworkRequests.authorization.urlPath) else { return }
@@ -55,7 +59,9 @@ extension AutorisationViewController: WKNavigationDelegate {
         WKNavigationResponse,
         decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void
     ) {
-        guard let url = navigationResponse.response.url, url.path == "/blank.html", let fragment = url.fragment else {
+        guard let url = navigationResponse.response.url, url.path == Constants.urlPath,
+              let fragment = url.fragment
+        else {
             decisionHandler(.allow)
             return
         }
@@ -80,7 +86,8 @@ extension AutorisationViewController: WKNavigationDelegate {
         Session.shared.token = token
         Session.shared.userID = userID
 
-        vkAPIService.printAllData()
+        performSegue(withIdentifier: Constants.segueIdentifier, sender: nil)
+
         decisionHandler(.cancel)
     }
 }

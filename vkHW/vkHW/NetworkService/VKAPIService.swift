@@ -5,37 +5,31 @@ import Alamofire
 import Foundation
 
 /// Апи запросы
-struct VKAPIService: LoadNetworkDataProtocol {
+class VKAPIService {
     // MARK: - Private Constants
 
     private enum Constants {
         static let groupSearchParam = "Football"
+        static let userID = "109010578"
     }
+
+    // MARK: - Public Properties
+
+    private let core = NetworkCoreService()
+
+    var users: [User] = []
 
     // MARK: - Public methods
 
-    func printAllData() {
-        fetchFriends()
-        fetchUserPhotos(for: Session.shared.userID)
-        fetchUserGroups(for: Session.shared.userID)
-        fetchPublicGroups()
+    func fetchFriends(complition: @escaping (Result<ResponseUsers, Error>) -> Void) {
+        core.loadData(urlPath: NetworkRequests.friends.urlPath, complition: complition)
     }
 
-    // MARK: - Private methods
-
-    private func fetchFriends() {
-        loadData(urlPath: NetworkRequests.friends.urlPath)
+    func fetchUserPhotos(userID: String, complition: @escaping (Result<ResponsePhotos, Error>) -> Void) {
+        core.loadData(urlPath: NetworkRequests.photos(userID: userID).urlPath, complition: complition)
     }
 
-    private func fetchUserPhotos(for userID: String) {
-        loadData(urlPath: NetworkRequests.photos(userID: userID).urlPath)
-    }
-
-    private func fetchUserGroups(for userID: String) {
-        loadData(urlPath: NetworkRequests.groups(userID: userID).urlPath)
-    }
-
-    private func fetchPublicGroups() {
-        loadData(urlPath: NetworkRequests.globalGroups(query: Constants.groupSearchParam).urlPath)
+    func fetchUserGroups(userID: String, complition: @escaping (Result<ResponseGroups, Error>) -> Void) {
+        core.loadData(urlPath: NetworkRequests.groups(userID: userID).urlPath, complition: complition)
     }
 }

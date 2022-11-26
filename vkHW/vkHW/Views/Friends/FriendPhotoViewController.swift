@@ -8,8 +8,6 @@ final class FriendPhotoViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let firstPhotoImageName = "0"
-        static let secondPhotoImageName = "vkImage"
         static let translationX = 500
         static let negativeTranslationX = -500
         static let defaultScaleX = 0.6
@@ -25,17 +23,13 @@ final class FriendPhotoViewController: UIViewController {
 
     // MARK: - Public Properties
 
-    var images = [
-        UIImage(named: Constants.firstPhotoImageName),
-        UIImage(named: Constants.secondPhotoImageName),
-        UIImage(named: Constants.firstPhotoImageName),
-        UIImage(named: Constants.secondPhotoImageName)
-    ]
-
+    var id = ""
     var navController: UINavigationController?
 
     // MARK: - Private Properties
 
+    private var networkService = VKAPIService()
+    private var images: [Photo] = []
     private var index = Int()
 
     // MARK: - Lifecycle
@@ -62,7 +56,9 @@ final class FriendPhotoViewController: UIViewController {
     }
 
     private func initMethods() {
+        loadData()
         createSwipeGestureRecognizer()
+        createSettingsFriendImageView()
     }
 
     private func createSettingsFriendImageView() {
@@ -99,7 +95,12 @@ final class FriendPhotoViewController: UIViewController {
             }, completion: { _ in
                 self.friendImageView.layer.opacity = 1
                 self.friendImageView.transform = .identity
-                self.friendImageView.image = self.images[self.index]
+
+                guard let url = URL(string: self.images[self.index].urls.last?.url ?? ""),
+                      let data = try? Data(contentsOf: url)
+                else { return }
+
+                self.friendImageView.image = UIImage(data: data)
             }
         )
     }
@@ -119,5 +120,29 @@ final class FriendPhotoViewController: UIViewController {
                 self.navController?.popViewController(animated: true)
             }
         )
+    }
+
+    private func setupFirstImageView() {
+        if !images.isEmpty {
+            guard let url = URL(string: images[index].urls.last?.url ?? ""),
+                  let data = try? Data(contentsOf: url)
+            else { return }
+            friendImageView.image = UIImage(data: data)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+    }
+
+    private func loadData() {
+        networkService.fetchUserPhotos(userID: id) { [weak self] item in
+            guard let self = self else { return }
+            switch item {
+            case let .success(data):
+                self.images = data.photos.photos
+                self.setupFirstImageView()
+            case let .failure(error):
+                print(error)
+            }
+        }
     }
 }

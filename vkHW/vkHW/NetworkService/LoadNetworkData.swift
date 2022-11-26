@@ -4,18 +4,18 @@
 import Alamofire
 import Foundation
 
-/// Протокол закгрузки данных
-protocol LoadNetworkDataProtocol {
-    func loadData(urlPath: String)
-}
-
-// MARK: - Реализация протокола
-
-extension LoadNetworkDataProtocol {
-    func loadData(urlPath: String) {
+/// Получение данных
+class NetworkCoreService {
+    func loadData<T: Decodable>(urlPath: String, complition: @escaping (Result<T, Error>) -> Void) {
         AF.request(urlPath).responseJSON { response in
-            guard let value = response.value else { return }
-            print(value)
+            guard let value = response.data else { return }
+            do {
+                let object = try JSONDecoder().decode(T.self, from: value)
+                complition(.success(object))
+            } catch {
+                complition(.failure(error))
+                print("FUCK")
+            }
         }
     }
 }

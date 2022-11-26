@@ -13,7 +13,10 @@ final class GroupTableViewCell: UITableViewCell {
     // MARK: - Public Methods
 
     func configure(nameLabelText: String, groupsImageName: String) {
+        guard let url = URL(string: groupsImageName),
+              let data = try? Data(contentsOf: url)
+        else { return }
         groupNameLabel.text = nameLabelText
-        groupImageView.image = UIImage(named: groupsImageName)
+        groupImageView.image = UIImage(data: data)
     }
 }

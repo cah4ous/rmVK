@@ -18,23 +18,28 @@ final class GroupTableViewController: UITableViewController {
 
     @IBOutlet private var searchBar: UISearchBar!
 
-    // MARK: - Public Properties
-
-    var groups: [Group] = [
-        Group(name: Constants.groupNameText, imageName: Constants.groupImageNameText),
-        Group(name: Constants.otherGroupNameText, imageName: Constants.groupImageNameText),
-        Group(name: Constants.groupNameText, imageName: Constants.groupImageNameText)
-    ]
-
     // MARK: - Private Properties
 
     private var searches: [Group]?
+    private var groups: [Group] = []
+    private var networkService = VKAPIService()
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
+
+        networkService.fetchUserGroups(userID: Session.shared.userID) { [weak self] item in
+            guard let self = self else { return }
+            switch item {
+            case let .success(data):
+                self.groups = data.groups.groups
+                self.tableView.reloadData()
+            case let .failure(error):
+                print(error)
+            }
+        }
     }
 
     // MARK: - Public Methods
@@ -54,7 +59,7 @@ final class GroupTableViewController: UITableViewController {
         ) as? GroupTableViewCell
         else { return UITableViewCell() }
         let group = groups[indexPath.row]
-        cell.configure(nameLabelText: group.name, groupsImageName: group.imageName)
+        cell.configure(nameLabelText: group.name, groupsImageName: group.photoImageName ?? "0")
         return cell
     }
 
