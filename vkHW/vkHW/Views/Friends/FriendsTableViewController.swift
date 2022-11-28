@@ -73,7 +73,11 @@ final class FriendsTableViewController: UITableViewController {
             let friend = sortedUsersMap[userSectionsTitles[indexPath.section]]?[indexPath.row]
         else { return UITableViewCell() }
 
-        cell.configure(nameLabelText: friend.firstName, avatarImageName: friend.photoImageName ?? "0")
+        cell.configure(
+            nameLabelText: friend.firstName,
+            avatarImageName: friend.photoImageName ?? "0",
+            networkService: networkService
+        )
         return cell
     }
 

@@ -46,11 +46,9 @@ final class NetworkService {
     }
 
     func downloadImage(url: String) -> Data? {
-        var dataImage: Data?
         guard let url = URL(string: url),
               let data = try? Data(contentsOf: url)
         else { return nil }
-        dataImage = data
-        return dataImage
+        return data
     }
 }

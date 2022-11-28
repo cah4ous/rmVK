@@ -96,7 +96,7 @@ final class FriendPhotoViewController: UIViewController {
                 self.friendImageView.layer.opacity = 1
                 self.friendImageView.transform = .identity
 
-                self.friendImageView.load(
+                self.friendImageView.loadData(
                     url: self.photos[self.index].urls.last?.url ?? "",
                     networkService: networkService
                 )
@@ -123,7 +123,7 @@ final class FriendPhotoViewController: UIViewController {
 
     private func setupFirstImageView() {
         if !photos.isEmpty {
-            friendImageView.load(url: photos[index].urls.last?.url ?? "", networkService: networkService)
+            friendImageView.loadData(url: photos[index].urls.last?.url ?? "", networkService: networkService)
         } else {
             navigationController?.popViewController(animated: true)
         }

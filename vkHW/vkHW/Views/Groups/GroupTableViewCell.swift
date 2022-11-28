@@ -12,8 +12,8 @@ final class GroupTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configure(nameLabelText: String, groupsImageName: String) {
+    func configure(nameLabelText: String, groupsImageName: String, networkService: NetworkService) {
         groupNameLabel.text = nameLabelText
-        groupImageView.load(url: groupsImageName, networkService: NetworkService())
+        groupImageView.loadData(url: groupsImageName, networkService: networkService)
     }
 }

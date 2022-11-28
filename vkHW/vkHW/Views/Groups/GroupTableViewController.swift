@@ -72,7 +72,11 @@ final class GroupTableViewController: UITableViewController {
         ) as? GroupTableViewCell
         else { return UITableViewCell() }
         let group = groups[indexPath.row]
-        cell.configure(nameLabelText: group.name, groupsImageName: group.photoImageName ?? "0")
+        cell.configure(
+            nameLabelText: group.name,
+            groupsImageName: group.photoImageName ?? "0",
+            networkService: networkService
+        )
         return cell
     }
 
