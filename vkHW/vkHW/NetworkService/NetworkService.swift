@@ -44,4 +44,13 @@ final class NetworkService {
     func fetchUserGroups(userID: String, complition: @escaping (Result<ResponseGroups, Error>) -> Void) {
         loadData(urlPath: NetworkRequests.groups(userID: userID).urlPath, completion: complition)
     }
+
+    func downloadImage(url: String) -> Data? {
+        var dataImage: Data?
+        guard let url = URL(string: url),
+              let data = try? Data(contentsOf: url)
+        else { return nil }
+        dataImage = data
+        return dataImage
+    }
 }

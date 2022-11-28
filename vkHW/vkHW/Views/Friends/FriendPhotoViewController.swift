@@ -92,13 +92,14 @@ final class FriendPhotoViewController: UIViewController {
                 self.friendImageView.transform = translation
                     .concatenating(CGAffineTransform(scaleX: Constants.defaultScaleX, y: Constants.defaultScaleX))
                 self.friendImageView.layer.opacity = Constants.defaultOpacity
-            }, completion: { _ in
+            }, completion: { [self] _ in
                 self.friendImageView.layer.opacity = 1
                 self.friendImageView.transform = .identity
 
-                guard let url = URL(string: self.photos[self.index].urls.last?.url ?? "") else { return }
-
-                self.friendImageView.load(url: url)
+                self.friendImageView.load(
+                    url: self.photos[self.index].urls.last?.url ?? "",
+                    networkService: networkService
+                )
             }
         )
     }
@@ -122,8 +123,7 @@ final class FriendPhotoViewController: UIViewController {
 
     private func setupFirstImageView() {
         if !photos.isEmpty {
-            guard let url = URL(string: photos[index].urls.last?.url ?? "") else { return }
-            friendImageView.load(url: url)
+            friendImageView.load(url: photos[index].urls.last?.url ?? "", networkService: networkService)
         } else {
             navigationController?.popViewController(animated: true)
         }

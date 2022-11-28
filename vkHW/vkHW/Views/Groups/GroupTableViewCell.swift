@@ -13,9 +13,7 @@ final class GroupTableViewCell: UITableViewCell {
     // MARK: - Public Methods
 
     func configure(nameLabelText: String, groupsImageName: String) {
-        guard let url = URL(string: groupsImageName) else { return }
-
         groupNameLabel.text = nameLabelText
-        groupImageView.load(url: url)
+        groupImageView.load(url: groupsImageName, networkService: NetworkService())
     }
 }
