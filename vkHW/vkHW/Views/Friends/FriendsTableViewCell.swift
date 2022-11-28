@@ -12,8 +12,8 @@ final class FriendsTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configure(nameLabelText: String, avatarImageName: String) {
+    func configure(nameLabelText: String, avatarImageName: String, networkService: NetworkService) {
         nameLabel.text = nameLabelText
-        avatarView.image = UIImage(named: avatarImageName)
+        avatarView.avatarImageView.loadData(url: avatarImageName, networkService: networkService)
     }
 }

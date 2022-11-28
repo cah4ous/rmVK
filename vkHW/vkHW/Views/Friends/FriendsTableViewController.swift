@@ -4,12 +4,13 @@
 import UIKit
 
 /// Экран списка друзей
-class FriendsTableViewController: UITableViewController {
+final class FriendsTableViewController: UITableViewController {
     // MARK: - Constants
 
     private enum Constants {
         static let friendsCellIdentifier = "friendsCell"
         static let friendsVCIdentifier = "mainInfoFriendID"
+        static let friendSegueIdentifier = "friendsSegue"
         static let defaultBlack = "defaultBlack"
         static let firstPersonName = "Oleg"
         static let secondPersonName = "Alex"
@@ -18,19 +19,12 @@ class FriendsTableViewController: UITableViewController {
         static let avatarImageName = "0"
     }
 
-    // MARK: - Public Properties
-
-    var friends = [
-        Friend(name: Constants.firstPersonName, avatarImageName: Constants.avatarImageName, likeCount: 15),
-        Friend(name: Constants.secondPersonName, avatarImageName: Constants.avatarImageName, likeCount: 30),
-        Friend(name: Constants.thirdPersonName, avatarImageName: Constants.avatarImageName, likeCount: 50),
-        Friend(name: Constants.forthPersonName, avatarImageName: Constants.avatarImageName, likeCount: 500)
-    ]
-
     // MARK: - Private Properties
 
-    private var friendsSectionsDict: [Character: [Friend]] = [:]
-    private var friendSectionsTitles: [Character] = []
+    private var userSectionsTitles: [Character] = []
+    private var sortedUsersMap = [Character: [User]]()
+    private var networkService = NetworkService()
+    private var users: [User] = []
 
     // MARK: - Lifecycle
 
@@ -41,8 +35,16 @@ class FriendsTableViewController: UITableViewController {
 
     // MARK: - Public Methods
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == Constants.friendSegueIdentifier,
+              let allPhotosViewController = segue.destination as? FriendPhotoViewController,
+              let indexPath = tableView.indexPathForSelectedRow,
+              let id = getOneUser(indexPath: indexPath)?.id else { return }
+        allPhotosViewController.id = "\(id)"
+    }
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        String(friendSectionsTitles[section])
+        String(userSectionsTitles[section])
     }
 
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -52,18 +54,15 @@ class FriendsTableViewController: UITableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        friendsSectionsDict.count
+        sortedUsersMap.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        friendsSectionsDict[friendSectionsTitles[section]]?.count ?? 0
+        sortedUsersMap[userSectionsTitles[section]]?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let nextVC = storyboard?
-            .instantiateViewController(identifier: Constants.friendsVCIdentifier) as? FriendPhotoViewController
-        else { return }
-        navigationController?.pushViewController(nextVC, animated: true)
+        performSegue(withIdentifier: Constants.friendSegueIdentifier, sender: nil)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -71,28 +70,53 @@ class FriendsTableViewController: UITableViewController {
             withIdentifier: Constants.friendsCellIdentifier,
             for: indexPath
         ) as? FriendsTableViewCell,
-            let friend = friendsSectionsDict[friendSectionsTitles[indexPath.section]]?[indexPath.row]
+            let friend = sortedUsersMap[userSectionsTitles[indexPath.section]]?[indexPath.row]
         else { return UITableViewCell() }
 
-        cell.configure(nameLabelText: friend.name, avatarImageName: friend.avatarImageName)
+        cell.configure(
+            nameLabelText: friend.firstName,
+            avatarImageName: friend.photoImageName ?? "0",
+            networkService: networkService
+        )
         return cell
     }
 
     // MARK: - Private Methods
 
-    private func initMethods() {
-        createFriendSections()
+    private func getOneUser(indexPath: IndexPath) -> User? {
+        let firstChar = sortedUsersMap.keys.sorted()[indexPath.section]
+        guard let users = sortedUsersMap[firstChar] else { return nil }
+        let user = users[indexPath.row]
+        return user
     }
 
-    private func createFriendSections() {
-        for friend in friends {
-            guard let firstLetter = friend.name.first else { return }
-            if friendsSectionsDict[firstLetter] != nil {
-                friendsSectionsDict[firstLetter]?.append(friend)
-            } else {
-                friendsSectionsDict[firstLetter] = [friend]
+    private func initMethods() {
+        loadData()
+    }
+
+    private func loadData() {
+        networkService.fetchFriends { [weak self] item in
+            guard let self = self else { return }
+            switch item {
+            case let .success(data):
+                self.users = data.users.users
+                self.sortUsers()
+                self.tableView.reloadData()
+            case let .failure(error):
+                print(error)
             }
         }
-        friendSectionsTitles = Array(friendsSectionsDict.keys).sorted()
+    }
+
+    private func sortUsers() {
+        for user in users {
+            guard let firstLetter = user.firstName.first else { return }
+            if sortedUsersMap[firstLetter] != nil {
+                sortedUsersMap[firstLetter]?.append(user)
+            } else {
+                sortedUsersMap[firstLetter] = [user]
+            }
+        }
+        userSectionsTitles = Array(sortedUsersMap.keys).sorted()
     }
 }
