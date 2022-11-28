@@ -28,8 +28,8 @@ final class FriendPhotoViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private var networkService = VKAPIService()
-    private var images: [Photo] = []
+    private var networkService = NetworkService()
+    private var photos: [Photo] = []
     private var index = Int()
 
     // MARK: - Lifecycle
@@ -81,7 +81,7 @@ final class FriendPhotoViewController: UIViewController {
 
     private func swipe(translationX: Int, increaseIndex: Int) {
         index += increaseIndex
-        guard index < images.count, index >= 0 else {
+        guard index < photos.count, index >= 0 else {
             index -= increaseIndex
             return
         }
@@ -96,11 +96,9 @@ final class FriendPhotoViewController: UIViewController {
                 self.friendImageView.layer.opacity = 1
                 self.friendImageView.transform = .identity
 
-                guard let url = URL(string: self.images[self.index].urls.last?.url ?? ""),
-                      let data = try? Data(contentsOf: url)
-                else { return }
+                guard let url = URL(string: self.photos[self.index].urls.last?.url ?? "") else { return }
 
-                self.friendImageView.image = UIImage(data: data)
+                self.friendImageView.load(url: url)
             }
         )
     }
@@ -123,11 +121,9 @@ final class FriendPhotoViewController: UIViewController {
     }
 
     private func setupFirstImageView() {
-        if !images.isEmpty {
-            guard let url = URL(string: images[index].urls.last?.url ?? ""),
-                  let data = try? Data(contentsOf: url)
-            else { return }
-            friendImageView.image = UIImage(data: data)
+        if !photos.isEmpty {
+            guard let url = URL(string: photos[index].urls.last?.url ?? "") else { return }
+            friendImageView.load(url: url)
         } else {
             navigationController?.popViewController(animated: true)
         }
@@ -138,7 +134,7 @@ final class FriendPhotoViewController: UIViewController {
             guard let self = self else { return }
             switch item {
             case let .success(data):
-                self.images = data.photos.photos
+                self.photos = data.photos.photos
                 self.setupFirstImageView()
             case let .failure(error):
                 print(error)

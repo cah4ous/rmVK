@@ -22,8 +22,8 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private Properties
 
     private var userSectionsTitles: [Character] = []
-    private var sortedUsers = [Character: [User]]()
-    private var networkService = VKAPIService()
+    private var sortedUsersMap = [Character: [User]]()
+    private var networkService = NetworkService()
     private var users: [User] = []
 
     // MARK: - Lifecycle
@@ -54,11 +54,11 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        sortedUsers.count
+        sortedUsersMap.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sortedUsers[userSectionsTitles[section]]?.count ?? 0
+        sortedUsersMap[userSectionsTitles[section]]?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -70,7 +70,7 @@ final class FriendsTableViewController: UITableViewController {
             withIdentifier: Constants.friendsCellIdentifier,
             for: indexPath
         ) as? FriendsTableViewCell,
-            let friend = sortedUsers[userSectionsTitles[indexPath.section]]?[indexPath.row]
+            let friend = sortedUsersMap[userSectionsTitles[indexPath.section]]?[indexPath.row]
         else { return UITableViewCell() }
 
         cell.configure(nameLabelText: friend.firstName, avatarImageName: friend.photoImageName ?? "0")
@@ -80,8 +80,8 @@ final class FriendsTableViewController: UITableViewController {
     // MARK: - Private Methods
 
     private func getOneUser(indexPath: IndexPath) -> User? {
-        let firstChar = sortedUsers.keys.sorted()[indexPath.section]
-        guard let users = sortedUsers[firstChar] else { return nil }
+        let firstChar = sortedUsersMap.keys.sorted()[indexPath.section]
+        guard let users = sortedUsersMap[firstChar] else { return nil }
         let user = users[indexPath.row]
         return user
     }
@@ -91,7 +91,8 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func loadData() {
-        networkService.fetchFriends { item in
+        networkService.fetchFriends { [weak self] item in
+            guard let self = self else { return }
             switch item {
             case let .success(data):
                 self.users = data.users.users
@@ -106,12 +107,12 @@ final class FriendsTableViewController: UITableViewController {
     private func sortUsers() {
         for user in users {
             guard let firstLetter = user.firstName.first else { return }
-            if sortedUsers[firstLetter] != nil {
-                sortedUsers[firstLetter]?.append(user)
+            if sortedUsersMap[firstLetter] != nil {
+                sortedUsersMap[firstLetter]?.append(user)
             } else {
-                sortedUsers[firstLetter] = [user]
+                sortedUsersMap[firstLetter] = [user]
             }
         }
-        userSectionsTitles = Array(sortedUsers.keys).sorted()
+        userSectionsTitles = Array(sortedUsersMap.keys).sorted()
     }
 }

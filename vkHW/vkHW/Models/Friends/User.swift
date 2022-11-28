@@ -1,25 +1,7 @@
-// ResponseFriends.swift
+// User.swift
 // Copyright © RoadMap. All rights reserved.
 
 import RealmSwift
-
-/// Ответ пользователи
-struct ResponseUsers: Decodable {
-    let users: Users
-
-    private enum CodingKeys: String, CodingKey {
-        case users = "response"
-    }
-}
-
-/// Список пользователей
-struct Users: Decodable {
-    let users: [User]
-
-    private enum CodingKeys: String, CodingKey {
-        case users = "items"
-    }
-}
 
 /// Пользователь
 final class User: Object, Decodable {

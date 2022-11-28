@@ -13,10 +13,9 @@ final class GroupTableViewCell: UITableViewCell {
     // MARK: - Public Methods
 
     func configure(nameLabelText: String, groupsImageName: String) {
-        guard let url = URL(string: groupsImageName),
-              let data = try? Data(contentsOf: url)
-        else { return }
+        guard let url = URL(string: groupsImageName) else { return }
+
         groupNameLabel.text = nameLabelText
-        groupImageView.image = UIImage(data: data)
+        groupImageView.load(url: url)
     }
 }

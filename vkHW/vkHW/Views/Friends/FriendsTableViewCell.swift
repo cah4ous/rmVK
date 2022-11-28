@@ -13,11 +13,8 @@ final class FriendsTableViewCell: UITableViewCell {
     // MARK: - Public Methods
 
     func configure(nameLabelText: String, avatarImageName: String) {
-        guard let url = URL(string: avatarImageName),
-              let data = try? Data(contentsOf: url)
-        else { return }
-
+        guard let url = URL(string: avatarImageName) else { return }
         nameLabel.text = nameLabelText
-        avatarView.image = UIImage(data: data)
+        avatarView.avatarImageView.load(url: url)
     }
 }

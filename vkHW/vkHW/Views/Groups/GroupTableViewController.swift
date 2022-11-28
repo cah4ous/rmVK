@@ -22,14 +22,27 @@ final class GroupTableViewController: UITableViewController {
 
     private var searches: [Group]?
     private var groups: [Group] = []
-    private var networkService = VKAPIService()
+    private var networkService = NetworkService()
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar.delegate = self
+        initMethods()
+    }
 
+    // MARK: - Private Methods
+
+    private func initMethods() {
+        loadData()
+        createSearchBarSettings()
+    }
+
+    private func createSearchBarSettings() {
+        searchBar.delegate = self
+    }
+
+    private func loadData() {
         networkService.fetchUserGroups(userID: Session.shared.userID) { [weak self] item in
             guard let self = self else { return }
             switch item {

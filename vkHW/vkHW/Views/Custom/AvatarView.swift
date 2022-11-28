@@ -33,9 +33,7 @@ final class AvatarView: UIView {
         }
     }
 
-    // MARK: - Private Properties
-
-    private var avatarImageView = UIImageView()
+    var avatarImageView = UIImageView()
 
     // MARK: - Initializers
 

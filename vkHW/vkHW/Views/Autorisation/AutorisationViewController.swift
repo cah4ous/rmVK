@@ -26,7 +26,7 @@ final class AutorisationViewController: UIViewController {
     // MARK: - Private Properties
 
     private var session = Session.shared
-    private var vkAPIService = VKAPIService()
+    private var networkService = NetworkService()
 
     private var users: [User] = []
 
