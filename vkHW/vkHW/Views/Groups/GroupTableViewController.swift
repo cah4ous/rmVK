@@ -15,13 +15,8 @@ final class GroupTableViewController: UITableViewController {
         static let groupImageNameText = "0"
     }
 
-    // MARK: - Private IBOutlets
-
-    @IBOutlet private var searchBar: UISearchBar!
-
     // MARK: - Private Properties
-
-    private var searches: [Group]?
+    
     private var groups: Results<Group>?
     private var networkService = NetworkService()
     private var realmService = RealmService()
@@ -37,13 +32,7 @@ final class GroupTableViewController: UITableViewController {
     // MARK: - Private Methods
 
     private func initMethods() {
-//        loadData()
         loadGroupsToRealm()
-        createSearchBarSettings()
-    }
-
-    private func createSearchBarSettings() {
-        searchBar.delegate = self
     }
 
     private func loadGroupsToRealm() {
@@ -106,7 +95,6 @@ final class GroupTableViewController: UITableViewController {
                   for: indexPath
               ) as? GroupTableViewCell
         else { return UITableViewCell() }
-//        let group = groups[indexPath.row]
         cell.configure(
             nameLabelText: group.name,
             groupsImageName: group.photoImageName ?? "0",
@@ -121,27 +109,6 @@ final class GroupTableViewController: UITableViewController {
         forRowAt indexPath: IndexPath
     ) {
         guard editingStyle == .delete else { return }
-//        groups.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
-    }
-}
-
-// UISearchBarDelegate
-extension GroupTableViewController: UISearchBarDelegate {
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//        searches = groups
-    }
-
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-//        groups = searches ?? []
-        tableView.reloadData()
-    }
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        groups = searches ?? []
-//        if !searchText.isEmpty {
-//            groups = groups.filter { $0.name.lowercased().contains(searchText.lowercased()) }
-//        }
-        tableView.reloadData()
     }
 }

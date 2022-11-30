@@ -4,9 +4,9 @@
 import RealmSwift
 
 /// База данных
-class RealmService {
-    
+final class RealmService {
     // MARK: - Public Methods
+
     func saveDataToRealm<T: Object>(_ data: [T]) {
         do {
             let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
