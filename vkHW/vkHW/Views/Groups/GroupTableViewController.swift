@@ -16,7 +16,7 @@ final class GroupTableViewController: UITableViewController {
     }
 
     // MARK: - Private Properties
-    
+
     private var groups: Results<Group>?
     private var networkService = NetworkService()
     private var realmService = RealmService()
@@ -32,18 +32,18 @@ final class GroupTableViewController: UITableViewController {
     // MARK: - Private Methods
 
     private func initMethods() {
-        loadGroupsToRealm()
+        loadData()
     }
 
-    private func loadGroupsToRealm() {
+    private func loadData() {
         do {
-            let realm = try Realm()
-            let newGroups = realm.objects(Group.self)
+            guard let newGroups = RealmService.defaultRealmService.readData(type: Group.self)
+            else { return }
             addNotificationToken(result: newGroups)
             if !newGroups.isEmpty {
                 groups = newGroups
             } else {
-                loadData()
+                fetchUserGroups()
             }
             tableView.reloadData()
         } catch {
@@ -60,18 +60,18 @@ final class GroupTableViewController: UITableViewController {
             case .update:
                 self.groups = result
                 self.tableView.reloadData()
-            case .error:
-                print("error")
+            case let .error(error):
+                print(error.localizedDescription)
             }
         }
     }
 
-    private func loadData() {
+    private func fetchUserGroups() {
         networkService.fetchUserGroups(userID: Session.shared.userID) { [weak self] item in
             guard let self = self else { return }
             switch item {
             case let .success(data):
-                self.realmService.saveDataToRealm(data.groups.groups)
+                RealmService.defaultRealmService.saveData(data.groups.groups)
             case let .failure(error):
                 print(error.localizedDescription)
             }

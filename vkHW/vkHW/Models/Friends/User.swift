@@ -5,9 +5,13 @@ import RealmSwift
 
 /// Пользователь
 final class User: Object, Decodable {
+    /// Идентификатор
     @Persisted(primaryKey: true) var id: Int
+    /// Имя
     @Persisted var firstName: String
+    /// Фамилия
     @Persisted var lastName: String
+    /// Размер фото
     @Persisted var photoImageName: String?
 
     private enum CodingKeys: String, CodingKey {

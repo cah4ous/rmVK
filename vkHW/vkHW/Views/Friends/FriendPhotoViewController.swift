@@ -58,7 +58,7 @@ final class FriendPhotoViewController: UIViewController {
     }
 
     private func initMethods() {
-        loadImagesToRealm()
+        loadData()
         createSwipeGestureRecognizer()
         createSettingsFriendImageView()
     }
@@ -131,29 +131,34 @@ final class FriendPhotoViewController: UIViewController {
         }
     }
 
-    private func loadImagesToRealm() {
+    private func setupRealm() -> [Photo] {
+        guard let realm = try? Realm() else { return [] }
+        let newPhotos = Array(realm.objects(Photo.self).where { $0.ownerId == Int(id) ?? 0 })
+        return newPhotos
+    }
+
+    private func loadData() {
         do {
-            let realm = try Realm()
-            let newPhotos = Array(realm.objects(Photo.self).where { $0.ownerId == Int(id) ?? 0 })
+            guard let defaultPhotos = RealmService.defaultRealmService.readData(type: Photo.self) else { return }
+            let newPhotos = Array(defaultPhotos.where { $0.ownerId == Int(id) ?? 0 })
             if photos != newPhotos {
                 photos = newPhotos
                 setupFirstImageView()
             } else {
-                loadData()
+                fetchUserPhotos()
             }
-
         } catch {
             print(error.localizedDescription)
         }
     }
 
-    private func loadData() {
+    private func fetchUserPhotos() {
         networkService.fetchUserPhotos(userID: id) { [weak self] item in
             guard let self = self else { return }
             switch item {
             case let .success(data):
                 self.photos = data.photos.photos
-                self.realmService.saveDataToRealm(self.photos)
+                self.realmService.saveData(self.photos)
                 self.setupFirstImageView()
             case let .failure(error):
                 print(error.localizedDescription)

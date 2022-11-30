@@ -25,7 +25,6 @@ final class FriendsTableViewController: UITableViewController {
     private var userSectionsTitles: [Character] = []
     private var sortedUsersMap = [Character: [User]]()
     private var networkService = NetworkService()
-    private var realmService = RealmService()
     private var friendToken: NotificationToken?
     private var users: Results<User>?
 
@@ -94,31 +93,31 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func initMethods() {
-        loadFriendsToRealm()
+        loadData()
     }
 
-    private func loadFriendsToRealm() {
+    private func loadData() {
         do {
-            let realm = try Realm()
-            let friends = realm.objects(User.self)
+            guard let friends = RealmService.defaultRealmService.readData(type: User.self)
+            else { return }
             addNotificationToken(result: friends)
             if !friends.isEmpty {
                 users = friends
                 sortUsers()
             } else {
-                loadData()
+                fetchFriends()
             }
         } catch {
             print(error.localizedDescription)
         }
     }
 
-    private func loadData() {
+    private func fetchFriends() {
         networkService.fetchFriends { [weak self] item in
             guard let self = self else { return }
             switch item {
             case let .success(data):
-                self.realmService.saveDataToRealm(data.users.users)
+                RealmService.defaultRealmService.saveData(data.users.users)
             case let .failure(error):
                 print(error.localizedDescription)
             }
