@@ -1,6 +1,7 @@
 // FriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import RealmSwift
 import UIKit
 
 /// Экран списка друзей
@@ -24,7 +25,8 @@ final class FriendsTableViewController: UITableViewController {
     private var userSectionsTitles: [Character] = []
     private var sortedUsersMap = [Character: [User]]()
     private var networkService = NetworkService()
-    private var users: [User] = []
+    private var friendToken: NotificationToken?
+    private var users: Results<User>?
 
     // MARK: - Lifecycle
 
@@ -91,7 +93,23 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func initMethods() {
-        loadData()
+        loadFriendsToRealm()
+    }
+
+    private func loadFriendsToRealm() {
+        do {
+            let realm = try Realm()
+            let friends = realm.objects(User.self)
+            addNotificationToken(result: friends)
+            if !friends.isEmpty {
+                users = friends
+                sortUsers()
+            } else {
+                loadData()
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
     private func loadData() {
@@ -99,16 +117,30 @@ final class FriendsTableViewController: UITableViewController {
             guard let self = self else { return }
             switch item {
             case let .success(data):
-                self.users = data.users.users
-                self.sortUsers()
-                self.tableView.reloadData()
+                self.networkService.saveDataToRealm(data.users.users)
             case let .failure(error):
                 print(error)
             }
         }
     }
 
+    private func addNotificationToken(result: Results<User>) {
+        friendToken = result.observe { [weak self] (change: RealmCollectionChange) in
+            guard let self = self else { return }
+            switch change {
+            case .initial:
+                break
+            case .update:
+                self.users = result
+                self.sortUsers()
+            case let .error(error):
+                print(error)
+            }
+        }
+    }
+
     private func sortUsers() {
+        guard let users = users else { return }
         for user in users {
             guard let firstLetter = user.firstName.first else { return }
             if sortedUsersMap[firstLetter] != nil {
@@ -118,5 +150,6 @@ final class FriendsTableViewController: UITableViewController {
             }
         }
         userSectionsTitles = Array(sortedUsersMap.keys).sorted()
+        tableView.reloadData()
     }
 }

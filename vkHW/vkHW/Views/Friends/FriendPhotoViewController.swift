@@ -1,6 +1,7 @@
 // FriendPhotoViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import RealmSwift
 import UIKit
 
 /// Экран изображений
@@ -56,7 +57,7 @@ final class FriendPhotoViewController: UIViewController {
     }
 
     private func initMethods() {
-        loadData()
+        loadImagesToRealm()
         createSwipeGestureRecognizer()
         createSettingsFriendImageView()
     }
@@ -129,12 +130,29 @@ final class FriendPhotoViewController: UIViewController {
         }
     }
 
+    private func loadImagesToRealm() {
+        do {
+            let realm = try Realm()
+            let newPhotos = Array(realm.objects(Photo.self).where { $0.ownerId == Int(id) ?? 0 })
+            if photos != newPhotos {
+                photos = newPhotos
+                setupFirstImageView()
+            } else {
+                loadData()
+            }
+
+        } catch {
+//            loadData()
+        }
+    }
+
     private func loadData() {
         networkService.fetchUserPhotos(userID: id) { [weak self] item in
             guard let self = self else { return }
             switch item {
             case let .success(data):
                 self.photos = data.photos.photos
+                self.networkService.saveDataToRealm(self.photos)
                 self.setupFirstImageView()
             case let .failure(error):
                 print(error)

@@ -5,10 +5,10 @@ import RealmSwift
 
 /// Пользователь
 final class User: Object, Decodable {
-    @objc dynamic var id: Int
-    @objc dynamic var firstName: String
-    @objc dynamic var lastName: String
-    @objc dynamic var photoImageName: String?
+    @Persisted(primaryKey: true) var id: Int
+    @Persisted var firstName: String
+    @Persisted var lastName: String
+    @Persisted var photoImageName: String?
 
     private enum CodingKeys: String, CodingKey {
         case id
