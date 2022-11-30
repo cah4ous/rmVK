@@ -24,6 +24,7 @@ final class GroupTableViewController: UITableViewController {
     private var searches: [Group]?
     private var groups: Results<Group>?
     private var networkService = NetworkService()
+    private var realmService = RealmService()
     private var notificationToken: NotificationToken?
 
     // MARK: - Lifecycle
@@ -81,10 +82,9 @@ final class GroupTableViewController: UITableViewController {
             guard let self = self else { return }
             switch item {
             case let .success(data):
-//                self.groups = data.groups.groups
-                self.networkService.saveDataToRealm(data.groups.groups)
+                self.realmService.saveDataToRealm(data.groups.groups)
             case let .failure(error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }

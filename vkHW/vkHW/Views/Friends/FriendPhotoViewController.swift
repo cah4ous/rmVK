@@ -30,6 +30,7 @@ final class FriendPhotoViewController: UIViewController {
     // MARK: - Private Properties
 
     private var networkService = NetworkService()
+    private var realmService = RealmService()
     private var photos: [Photo] = []
     private var index = Int()
 
@@ -142,7 +143,7 @@ final class FriendPhotoViewController: UIViewController {
             }
 
         } catch {
-//            loadData()
+            print(error.localizedDescription)
         }
     }
 
@@ -152,10 +153,10 @@ final class FriendPhotoViewController: UIViewController {
             switch item {
             case let .success(data):
                 self.photos = data.photos.photos
-                self.networkService.saveDataToRealm(self.photos)
+                self.realmService.saveDataToRealm(self.photos)
                 self.setupFirstImageView()
             case let .failure(error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }

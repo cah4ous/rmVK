@@ -25,6 +25,7 @@ final class FriendsTableViewController: UITableViewController {
     private var userSectionsTitles: [Character] = []
     private var sortedUsersMap = [Character: [User]]()
     private var networkService = NetworkService()
+    private var realmService = RealmService()
     private var friendToken: NotificationToken?
     private var users: Results<User>?
 
@@ -117,9 +118,9 @@ final class FriendsTableViewController: UITableViewController {
             guard let self = self else { return }
             switch item {
             case let .success(data):
-                self.networkService.saveDataToRealm(data.users.users)
+                self.realmService.saveDataToRealm(data.users.users)
             case let .failure(error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }
@@ -134,7 +135,7 @@ final class FriendsTableViewController: UITableViewController {
                 self.users = result
                 self.sortUsers()
             case let .error(error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }

@@ -54,16 +54,4 @@ final class NetworkService {
         else { return nil }
         return data
     }
-
-    func saveDataToRealm<T: Object>(_ data: [T]) {
-        do {
-//            let configuration = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-            let realm = try Realm()
-            try realm.write {
-                realm.add(data, update: .modified)
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
 }
