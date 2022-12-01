@@ -3,8 +3,6 @@
 
 import Alamofire
 import Foundation
-import Realm
-import RealmSwift
 
 /// Апи запросы
 final class NetworkService {

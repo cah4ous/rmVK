@@ -131,12 +131,6 @@ final class FriendPhotoViewController: UIViewController {
         }
     }
 
-    private func setupRealm() -> [Photo] {
-        guard let realm = try? Realm() else { return [] }
-        let newPhotos = Array(realm.objects(Photo.self).where { $0.ownerId == Int(id) ?? 0 })
-        return newPhotos
-    }
-
     private func loadData() {
         do {
             guard let defaultPhotos = RealmService.defaultRealmService.readData(type: Photo.self) else { return }
