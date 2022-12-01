@@ -1,13 +1,16 @@
 // Photo.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
-
+import RealmSwift
 /// Фото
-final class Photo: Decodable {
-    let urls: [Url]
+final class Photo: Object, Decodable {
+    @Persisted(primaryKey: true) var id: Int
+    @Persisted var urls = List<Url>()
+    @Persisted var ownerId: Int
 
     private enum CodingKeys: String, CodingKey {
         case urls = "sizes"
+        case ownerId = "owner_id"
+        case id
     }
 }

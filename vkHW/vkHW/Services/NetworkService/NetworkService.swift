@@ -26,6 +26,7 @@ final class NetworkService {
                 let object = try JSONDecoder().decode(T.self, from: value)
                 completion(.success(object))
             } catch {
+                print(error.localizedDescription)
                 completion(.failure(error))
             }
         }
@@ -33,16 +34,16 @@ final class NetworkService {
 
     // MARK: - Public methods
 
-    func fetchFriends(complition: @escaping (Result<ResponseUsers, Error>) -> Void) {
-        loadData(urlPath: NetworkRequests.friends.urlPath, completion: complition)
+    func fetchFriends(completion: @escaping (Result<ResponseUsers, Error>) -> Void) {
+        loadData(urlPath: NetworkRequests.friends.urlPath, completion: completion)
     }
 
-    func fetchUserPhotos(userID: String, complition: @escaping (Result<ResponsePhotos, Error>) -> Void) {
-        loadData(urlPath: NetworkRequests.photos(userID: userID).urlPath, completion: complition)
+    func fetchUserPhotos(userID: String, completion: @escaping (Result<ResponsePhotos, Error>) -> Void) {
+        loadData(urlPath: NetworkRequests.photos(userID: userID).urlPath, completion: completion)
     }
 
-    func fetchUserGroups(userID: String, complition: @escaping (Result<ResponseGroups, Error>) -> Void) {
-        loadData(urlPath: NetworkRequests.groups(userID: userID).urlPath, completion: complition)
+    func fetchUserGroups(userID: String, completion: @escaping (Result<ResponseGroups, Error>) -> Void) {
+        loadData(urlPath: NetworkRequests.groups(userID: userID).urlPath, completion: completion)
     }
 
     func downloadImage(url: String) -> Data? {

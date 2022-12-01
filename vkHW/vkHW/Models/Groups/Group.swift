@@ -5,8 +5,10 @@ import RealmSwift
 
 /// Группа
 final class Group: Object, Decodable {
-    @objc dynamic var name: String
-    @objc dynamic var photoImageName: String?
+    /// Название группы и идентификатор
+    @Persisted(primaryKey: true) var name: String
+    /// Размер фотографии
+    @Persisted var photoImageName: String?
 
     private enum CodingKeys: String, CodingKey {
         case name
