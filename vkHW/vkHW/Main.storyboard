@@ -305,13 +305,143 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="amp-CL-wv6">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsHeaderCell" rowHeight="77" id="amp-CL-wv6" customClass="NewsHeaderCell" customModule="vkHW" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="77"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="amp-CL-wv6" id="I6U-0t-nyj">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="77"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="DZl-7R-bf8">
+                                            <rect key="frame" x="20" y="11" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZQ-tL-EJA">
+                                            <rect key="frame" x="78" y="17" width="316" height="38"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="38" id="18J-DK-vsJ"/>
+                                                <constraint firstAttribute="width" constant="316" id="9qp-sI-6R9"/>
+                                                <constraint firstAttribute="width" secondItem="ZZQ-tL-EJA" secondAttribute="height" multiplier="158:19" id="ltX-9o-VJW"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyV-vP-R9s">
+                                            <rect key="frame" x="78" y="50" width="127" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <nil key="textColor"/>
+                                            <color key="highlightedColor" name="defaultGray"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ZZQ-tL-EJA" firstAttribute="leading" secondItem="I6U-0t-nyj" secondAttribute="leadingMargin" constant="58" id="Gwn-hV-u6h"/>
+                                        <constraint firstItem="ZZQ-tL-EJA" firstAttribute="top" secondItem="I6U-0t-nyj" secondAttribute="topMargin" constant="6" id="Yy4-Sy-r8O"/>
+                                        <constraint firstItem="ZZQ-tL-EJA" firstAttribute="trailing" secondItem="I6U-0t-nyj" secondAttribute="trailingMargin" id="pVe-V7-6BV"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="ZZQ-tL-EJA" secondAttribute="bottom" constant="11" id="qYr-Hw-Yay"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="postAvatarImageView" destination="DZl-7R-bf8" id="9cU-SA-dKA"/>
+                                    <outlet property="postAvatarNameLabel" destination="ZZQ-tL-EJA" id="FQH-zy-KJ4"/>
+                                    <outlet property="postDateLabel" destination="yyV-vP-R9s" id="159-si-Dgg"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsFooterCell" rowHeight="77" id="HuE-cx-JMw" customClass="NewsFooterCell" customModule="vkHW" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="121.5" width="414" height="77"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HuE-cx-JMw" id="3IR-8t-gUa">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="77"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uNs-M1-f8F" customClass="LikeControl" customModule="vkHW" customModuleProvider="target">
+                                            <rect key="frame" x="20" y="18" width="50" height="41"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="uNs-M1-f8F" secondAttribute="height" multiplier="50:41" id="RcY-jY-PkN"/>
+                                                <constraint firstAttribute="width" constant="50" id="Z6S-7z-fPr"/>
+                                                <constraint firstAttribute="height" constant="41" id="jBS-nT-lG6"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGO-tv-0G9">
+                                            <rect key="frame" x="78" y="18" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="uNs-M1-f8F" firstAttribute="top" secondItem="3IR-8t-gUa" secondAttribute="topMargin" constant="7" id="1nx-8x-aQf"/>
+                                        <constraint firstItem="uNs-M1-f8F" firstAttribute="bottom" secondItem="3IR-8t-gUa" secondAttribute="bottomMargin" constant="-7" id="9pL-tM-xnV"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="uNs-M1-f8F" secondAttribute="trailing" constant="324" id="XZp-7P-2Rf"/>
+                                        <constraint firstItem="uNs-M1-f8F" firstAttribute="leading" secondItem="3IR-8t-gUa" secondAttribute="leadingMargin" id="nBc-C8-Ehb"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="likeControl" destination="uNs-M1-f8F" id="pjL-G9-Js9"/>
+                                    <outlet property="likesCountLabel" destination="rGO-tv-0G9" id="WOI-p0-pgo"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsPostCell" rowHeight="203" id="4cl-Kc-iPP" customClass="NewsPostCell" customModule="vkHW" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="198.5" width="414" height="203"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4cl-Kc-iPP" id="jCH-pw-cuz">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="203"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1aC-T8-Oko">
+                                            <rect key="frame" x="20" y="11" width="374" height="192"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="374" id="F5G-FS-Abe"/>
+                                                <constraint firstAttribute="width" secondItem="1aC-T8-Oko" secondAttribute="height" multiplier="187:96" id="VGw-1O-w0P"/>
+                                                <constraint firstAttribute="height" constant="192" id="qil-LQ-MCn"/>
+                                            </constraints>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <color key="textColor" systemColor="labelColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="1aC-T8-Oko" firstAttribute="top" secondItem="jCH-pw-cuz" secondAttribute="top" constant="11" id="59j-CI-gJ9"/>
+                                        <constraint firstItem="1aC-T8-Oko" firstAttribute="leading" secondItem="jCH-pw-cuz" secondAttribute="leading" constant="20" id="ASA-fc-aNb"/>
+                                        <constraint firstAttribute="bottom" secondItem="1aC-T8-Oko" secondAttribute="bottom" id="DFG-2s-Nbi"/>
+                                        <constraint firstAttribute="trailing" secondItem="1aC-T8-Oko" secondAttribute="trailing" constant="20" id="OCZ-3K-pCe"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="postTextView" destination="1aC-T8-Oko" id="iCF-CK-JOP"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsImageCell" rowHeight="203" id="YHV-ew-kNp" customClass="NewsImageCell" customModule="vkHW" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="401.5" width="414" height="203"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YHV-ew-kNp" id="lfW-YM-mxO">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="203"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="7pe-IE-7HH">
+                                            <rect key="frame" x="20" y="11" width="374" height="181"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="374" id="PMb-nw-KfO"/>
+                                                <constraint firstAttribute="width" secondItem="7pe-IE-7HH" secondAttribute="height" multiplier="374:181" id="R4O-0a-a1C"/>
+                                                <constraint firstAttribute="height" constant="181" id="igt-h8-5ml"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="7pe-IE-7HH" firstAttribute="trailing" secondItem="lfW-YM-mxO" secondAttribute="trailingMargin" id="0hm-2y-oml"/>
+                                        <constraint firstItem="7pe-IE-7HH" firstAttribute="leading" secondItem="lfW-YM-mxO" secondAttribute="leadingMargin" id="3kF-82-HOi"/>
+                                        <constraint firstItem="7pe-IE-7HH" firstAttribute="bottom" secondItem="lfW-YM-mxO" secondAttribute="bottomMargin" id="Acx-3b-ald"/>
+                                        <constraint firstItem="7pe-IE-7HH" firstAttribute="top" secondItem="lfW-YM-mxO" secondAttribute="topMargin" id="ZfG-GC-All"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="postImageView" destination="7pe-IE-7HH" id="S48-HE-K5t"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -323,7 +453,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G3M-bk-JZp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3919" y="-893"/>
+            <point key="canvasLocation" x="3918.8405797101454" y="-893.30357142857133"/>
         </scene>
         <!--Друзья-->
         <scene sceneID="a4n-Jd-dbH">
@@ -368,6 +498,12 @@
         <namedColor name="defaultBlack">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="defaultGray">
+            <color red="0.88200002908706665" green="0.88599997758865356" blue="0.90200001001358032" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -46,6 +46,10 @@ final class NetworkService {
         loadData(urlPath: NetworkRequests.groups(userID: userID).urlPath, completion: completion)
     }
 
+    func fetchUserPosts(completion: @escaping (Result<ResponsePosts, Error>) -> Void) {
+        loadData(urlPath: NetworkRequests.news.urlPath, completion: completion)
+    }
+
     func downloadImage(url: String) -> Data? {
         guard let url = URL(string: url),
               let data = try? Data(contentsOf: url)

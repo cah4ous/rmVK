@@ -20,6 +20,7 @@ final class RealmService {
         var items: Results<T>?
         do {
             let realm = try Realm()
+            print(realm.configuration.fileURL)
             items = realm.objects(type)
         } catch {
             print(error.localizedDescription)
