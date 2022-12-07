@@ -4,8 +4,8 @@
 import UIKit
 
 // Текст поста ячейки
-final class NewsPostCell: UITableViewCell {
-    // MARK: - IBOutlets
+final class NewsPostCell: UITableViewCell, NewsCellConfigurable {
+    // MARK: - Private IBOutlets
 
     @IBOutlet private var postTextView: UITextView!
 

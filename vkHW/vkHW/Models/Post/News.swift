@@ -1,8 +1,6 @@
 // News.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
-
 /// Тип поста
 enum PostItemType: Decodable {
     case text
@@ -11,14 +9,23 @@ enum PostItemType: Decodable {
 
 /// Модель поста
 final class NewsFeed: Decodable {
+    /// Идентификатор
     var id: Int
+    /// Идентификатор группы
     var sourceId: Int
+    /// Дата новости
     var date: Int
+    /// Текст новости
     var text: String
+    /// Имя автора
     var authorName: String?
+    /// Фотография автора
     var avatarPath: String?
+    /// Фотография поста
     var postImage: String?
+    /// Тип поста
     var type: PostItemType?
+    /// Лайки
     var likes: Likes
 
     enum CodingKeys: String, CodingKey {
@@ -27,10 +34,5 @@ final class NewsFeed: Decodable {
         case text
         case likes
         case date
-    }
-
-    enum PostItemType {
-        case text
-        case image
     }
 }

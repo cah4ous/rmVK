@@ -3,9 +3,9 @@
 
 import UIKit
 
-// Хедер ячейки
-final class NewsHeaderCell: UITableViewCell {
-    // MARK: - IBOutlets
+/// Автор публикации
+final class NewsHeaderCell: UITableViewCell, NewsCellConfigurable {
+    // MARK: - Private IBOutlets
 
     @IBOutlet private var postAvatarImageView: UIImageView!
 
@@ -13,9 +13,11 @@ final class NewsHeaderCell: UITableViewCell {
 
     @IBOutlet private var postDateLabel: UILabel!
 
-    // MARK: - Public Methods
+    // MARK: - Private Properties
 
     private var networkService = NetworkService()
+
+    // MARK: - Public Methods
 
     func configure(_ news: NewsFeed) {
         postAvatarNameLabel.text = news.authorName

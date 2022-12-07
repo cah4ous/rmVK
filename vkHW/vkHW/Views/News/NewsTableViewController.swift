@@ -24,9 +24,6 @@ final class NewsTableViewController: UITableViewController {
 
     private var posts: [Posts] = []
     private var news: [NewsFeed] = []
-
-    // MARK: - Public Properties
-
     private var networkService = NetworkService()
 
     // MARK: - Lifecycle
@@ -39,39 +36,28 @@ final class NewsTableViewController: UITableViewController {
     // MARK: - Public Methods
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        NewsCellTypes.allCases.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var item = news[indexPath.section]
-        var identifier = ""
+        var post = news[indexPath.section]
+        let cellType = NewsCellTypes(rawValue: indexPath.row) ?? .content
+        var cellIdentifier = ""
 
-        switch indexPath.row {
-        case 0:
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: Constants.newsHeaderCellIdentifier,
-                for: indexPath
-            ) as? NewsHeaderCell else { return UITableViewCell() }
-            cell.configure(item)
-            return cell
-        case 1:
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: Constants.newsPostCellIdentifier,
-                for: indexPath
-            ) as? NewsPostCell else { return UITableViewCell() }
-            cell.configure(item)
-            return cell
-        case 2:
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: Constants.newsFooterCellIdentifier,
-                for: indexPath
-            ) as? NewsFooterCell else { return UITableViewCell() }
-            cell.configure(item)
-            return cell
-        default:
-            break
+        switch cellType {
+        case .header:
+            cellIdentifier = Constants.newsHeaderCellIdentifier
+        case .content:
+            cellIdentifier = Constants.newsPostCellIdentifier
+        case .footer:
+            cellIdentifier = Constants.newsFooterCellIdentifier
         }
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: cellIdentifier,
+            for: indexPath
+        ) as? NewsCell else { return UITableViewCell() }
+        cell.configure(post)
+        return cell
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

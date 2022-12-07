@@ -9,7 +9,7 @@ final class Group: Object, Decodable {
     @Persisted(primaryKey: true) var id: Int
     /// Название группы
     @Persisted var name: String
-    /// Размер фотографии
+    /// Фотография
     @Persisted var photoImageName: String?
 
     private enum CodingKeys: String, CodingKey {

@@ -5,7 +5,7 @@ import UIKit
 
 // Изображение поста ячейки
 final class NewsImageCell: UITableViewCell {
-    // MARK: - IBOutlets
+    // MARK: - Private IBOutlets
 
     @IBOutlet private var postImageView: UIImageView!
 }

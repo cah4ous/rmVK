@@ -3,9 +3,9 @@
 
 import UIKit
 
-// Футер ячейки
-final class NewsFooterCell: UITableViewCell {
-    // MARK: - IBOutlets
+/// Ячейка реакций пользователей на новость
+final class NewsFooterCell: UITableViewCell, NewsCellConfigurable {
+    // MARK: - Private IBOutlets
 
     @IBOutlet private var likeControl: LikeControl!
 

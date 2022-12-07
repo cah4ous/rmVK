@@ -1,12 +1,13 @@
 // Posts.swift
 // Copyright © RoadMap. All rights reserved.
 
-import Foundation
-
 /// Список новостей
 struct Posts: Decodable {
+    /// Новости
     let news: [NewsFeed]
+    /// Группы
     let groups: [Group]
+    /// Пользователи
     let friends: [User]
 
     enum CodingKeys: String, CodingKey {
