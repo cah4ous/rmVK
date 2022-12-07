@@ -22,9 +22,9 @@ final class NewsTableViewController: UITableViewController {
 
     // MARK: Private Properties
 
+    private let networkService = NetworkService()
     private var posts: [Posts] = []
     private var news: [NewsFeed] = []
-    private var networkService = NetworkService()
 
     // MARK: - Lifecycle
 
@@ -56,7 +56,7 @@ final class NewsTableViewController: UITableViewController {
             withIdentifier: cellIdentifier,
             for: indexPath
         ) as? NewsCell else { return UITableViewCell() }
-        cell.configure(post)
+        cell.configure(post, networkService: networkService)
         return cell
     }
 
@@ -68,7 +68,7 @@ final class NewsTableViewController: UITableViewController {
 
     private func initMethods() {
         createTableViewSettings()
-        fetchPosts()
+        fetchUserPosts()
     }
 
     private func createTableViewSettings() {
@@ -77,7 +77,7 @@ final class NewsTableViewController: UITableViewController {
     }
 
     private func filteringNews(response: Posts) {
-        response.news.forEach { news in
+        response.newsFeeds.forEach { news in
             if news.sourceId < 0 {
                 guard let group = response.groups.filter({ group in
                     group.id == news.sourceId * -1
@@ -85,18 +85,18 @@ final class NewsTableViewController: UITableViewController {
                 news.authorName = group.name
                 news.avatarPath = group.photoImageName
             } else {
-                guard let user = response.friends.filter({ user in
+                guard let user = response.users.filter({ user in
                     user.id == news.sourceId
                 }).first else { return }
                 news.authorName = "\(user.firstName) \(user.lastName)"
                 news.avatarPath = user.photoImageName
             }
         }
-        news = response.news
+        news = response.newsFeeds
         tableView.reloadData()
     }
 
-    private func fetchPosts() {
+    private func fetchUserPosts() {
         networkService.fetchUserPosts { [weak self] item in
             guard let self = self else { return }
             switch item {

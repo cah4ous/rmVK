@@ -4,15 +4,15 @@
 /// Список новостей
 struct Posts: Decodable {
     /// Новости
-    let news: [NewsFeed]
+    let newsFeeds: [NewsFeed]
     /// Группы
     let groups: [Group]
     /// Пользователи
-    let friends: [User]
+    let users: [User]
 
     enum CodingKeys: String, CodingKey {
-        case news = "items"
-        case friends = "profiles"
+        case newsFeeds = "items"
+        case users = "profiles"
         case groups
     }
 }

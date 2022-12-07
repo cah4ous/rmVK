@@ -8,22 +8,15 @@ final class NewsHeaderCell: UITableViewCell, NewsCellConfigurable {
     // MARK: - Private IBOutlets
 
     @IBOutlet private var postAvatarImageView: UIImageView!
-
     @IBOutlet private var postAvatarNameLabel: UILabel!
-
     @IBOutlet private var postDateLabel: UILabel!
-
-    // MARK: - Private Properties
-
-    private var networkService = NetworkService()
 
     // MARK: - Public Methods
 
-    func configure(_ news: NewsFeed) {
+    func configure(_ news: NewsFeed, networkService: NetworkService) {
+        guard let data = networkService.downloadImage(url: news.avatarPath ?? "") else { return }
+
         postAvatarNameLabel.text = news.authorName
-        guard let url = URL(string: news.avatarPath ?? ""),
-              let data = try? Data(contentsOf: url)
-        else { return }
         postAvatarImageView.image = UIImage(data: data)
         postDateLabel.text = dateFormatter(date: news.date)
     }

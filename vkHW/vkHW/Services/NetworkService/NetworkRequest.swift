@@ -46,17 +46,17 @@ enum NetworkRequests {
     var urlPath: String {
         switch self {
         case let .photos(userID):
-            return baseURLWithMethod(Constants.photosRequest) + Constants.ownerIdParam + userID + Constants
-                .withExtendedParam
+            return "\(baseURLWithMethod(Constants.photosRequest))" +
+                "\(Constants.ownerIdParam)\(userID)\(Constants.withExtendedParam)"
         case let .groups(userID):
-            return baseURLWithMethod(Constants.groupsRequest) + Constants.userIdParam + userID + Constants
-                .withExtendedParam
+            return "\(baseURLWithMethod(Constants.groupsRequest))" +
+                "\(Constants.userIdParam)\(userID)\(Constants.withExtendedParam)"
         case .news:
-            return baseURLWithMethod(Constants.newsRequest) + Constants.newsFilter
-        case .authorization:
-            return authorizationURL()
+            return "\(baseURLWithMethod(Constants.newsRequest))\(Constants.newsFilter)"
         case .friends:
-            return baseURLWithMethod(Constants.friendsRequest) + Constants.friendFields
+            return "\(baseURLWithMethod(Constants.friendsRequest))\(Constants.friendFields)"
+        case .authorization:
+            return "\(authorizationURL())"
         }
     }
 
