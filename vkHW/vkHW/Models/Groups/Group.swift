@@ -5,13 +5,16 @@ import RealmSwift
 
 /// Группа
 final class Group: Object, Decodable {
-    /// Название группы и идентификатор
-    @Persisted(primaryKey: true) var name: String
-    /// Размер фотографии
+    /// Идентификатор
+    @Persisted(primaryKey: true) var id: Int
+    /// Название группы
+    @Persisted var name: String
+    /// Фотография
     @Persisted var photoImageName: String?
 
     private enum CodingKeys: String, CodingKey {
         case name
+        case id
         case photoImageName = "photo_100"
     }
 }

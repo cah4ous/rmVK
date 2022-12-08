@@ -8,40 +8,23 @@ final class NewsTableViewController: UITableViewController {
     // MARK: Constants
 
     private enum Constants {
-        static let cellIdentifier = "NewsTableViewCell"
-        static let imageNameText = "0"
-        static let postText = "suiiii"
-        static let personalNameText = "oleg"
+        static let newsHeaderCellIdentifier = "NewsHeaderCell"
+        static let newsFooterCellIdentifier = "NewsFooterCell"
+        static let newsPostCellIdentifier = "NewsPostCell"
+        static let newsImageCellIdentifier = "NewsImageCell"
+    }
+
+    private enum NewsCellTypes: Int, CaseIterable {
+        case header
+        case content
+        case footer
     }
 
     // MARK: Private Properties
 
-    private var posts = [
-        Post(
-            personImageName: Constants.imageNameText,
-            personName: Constants.personalNameText,
-            postText: Constants.postText,
-            postImageName: Constants.imageNameText
-        ),
-        Post(
-            personImageName: Constants.imageNameText,
-            personName: Constants.personalNameText,
-            postText: Constants.postText,
-            postImageName: Constants.imageNameText
-        ),
-        Post(
-            personImageName: Constants.imageNameText,
-            personName: Constants.personalNameText,
-            postText: Constants.postText,
-            postImageName: Constants.imageNameText
-        ),
-        Post(
-            personImageName: Constants.imageNameText,
-            personName: Constants.personalNameText,
-            postText: Constants.postText,
-            postImageName: Constants.imageNameText
-        )
-    ]
+    private let networkService = NetworkService()
+    private var posts: [Posts] = []
+    private var news: [NewsFeed] = []
 
     // MARK: - Lifecycle
 
@@ -53,37 +36,75 @@ final class NewsTableViewController: UITableViewController {
     // MARK: - Public Methods
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        posts.count
+        NewsCellTypes.allCases.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let newsCell = tableView.dequeueReusableCell(
-            withIdentifier: Constants.cellIdentifier, for: indexPath
-        )
-            as? NewsTableViewCell else { return UITableViewCell() }
-        newsCell.configure(post: posts[indexPath.row])
-        return newsCell
+        var post = news[indexPath.section]
+        let cellType = NewsCellTypes(rawValue: indexPath.row) ?? .content
+        var cellIdentifier = ""
+
+        switch cellType {
+        case .header:
+            cellIdentifier = Constants.newsHeaderCellIdentifier
+        case .content:
+            cellIdentifier = Constants.newsPostCellIdentifier
+        case .footer:
+            cellIdentifier = Constants.newsFooterCellIdentifier
+        }
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: cellIdentifier,
+            for: indexPath
+        ) as? NewsCell else { return UITableViewCell() }
+        cell.configure(post, networkService: networkService)
+        return cell
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        news.count
     }
 
     // MARK: - Private Methods
 
     private func initMethods() {
         createTableViewSettings()
+        fetchUserPosts()
     }
 
     private func createTableViewSettings() {
         tableView.delegate = self
         tableView.dataSource = self
+    }
 
-        tableView.register(UINib(
-            nibName: Constants.cellIdentifier,
-            bundle: nil
-        ), forCellReuseIdentifier: Constants.cellIdentifier)
+    private func filteringNews(response: Posts) {
+        response.newsFeeds.forEach { news in
+            if news.sourceId < 0 {
+                guard let group = response.groups.filter({ group in
+                    group.id == news.sourceId * -1
+                }).first else { return }
+                news.authorName = group.name
+                news.avatarPath = group.photoImageName
+            } else {
+                guard let user = response.users.filter({ user in
+                    user.id == news.sourceId
+                }).first else { return }
+                news.authorName = "\(user.firstName) \(user.lastName)"
+                news.avatarPath = user.photoImageName
+            }
+        }
+        news = response.newsFeeds
+        tableView.reloadData()
+    }
 
-        tableView.rowHeight = UITableView.automaticDimension
+    private func fetchUserPosts() {
+        networkService.fetchUserPosts { [weak self] item in
+            guard let self = self else { return }
+            switch item {
+            case let .success(data):
+                self.filteringNews(response: data.posts)
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
