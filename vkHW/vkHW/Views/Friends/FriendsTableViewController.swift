@@ -25,7 +25,6 @@ final class FriendsTableViewController: UITableViewController {
 
     private var userSectionsTitles: [Character] = []
     private var sortedUsersMap = [Character: [User]]()
-    private var networkService = NetworkService()
     private var friendToken: NotificationToken?
     private var users: Results<User>?
     private var promiseService = PromiseService()
