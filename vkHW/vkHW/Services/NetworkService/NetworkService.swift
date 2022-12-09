@@ -42,12 +42,12 @@ final class NetworkService {
         loadData(urlPath: NetworkRequests.photos(userID: userID).urlPath, completion: completion)
     }
 
-    func fetchUserGroups(userID: String, completion: @escaping (Result<ResponseGroups, Error>) -> Void) {
-        loadData(urlPath: NetworkRequests.groups(userID: userID).urlPath, completion: completion)
-    }
-
     func fetchUserPosts(completion: @escaping (Result<ResponsePosts, Error>) -> Void) {
         loadData(urlPath: NetworkRequests.news.urlPath, completion: completion)
+    }
+
+    func fetchGroups() {
+        getGroups(urlString: NetworkRequests.groups.urlPath)
     }
 
     func downloadImage(url: String) -> Data? {
@@ -55,5 +55,23 @@ final class NetworkService {
               let data = try? Data(contentsOf: url)
         else { return nil }
         return data
+    }
+
+    func sendRequest(url: String) -> DataRequest {
+        let request = AF.request(url)
+        return request
+    }
+
+    func getGroups(urlString: String) {
+        let opq = OperationQueue()
+        let request = sendRequest(url: urlString)
+        let getDataOperation = GetDataOperation(request: request)
+        opq.addOperation(getDataOperation)
+        let parseDataOperation = ParseDataOperation()
+        parseDataOperation.addDependency(getDataOperation)
+        opq.addOperation(parseDataOperation)
+        let saveToRealmOperation = SaveToRealmOperation()
+        saveToRealmOperation.addDependency(parseDataOperation)
+        opq.addOperation(saveToRealmOperation)
     }
 }

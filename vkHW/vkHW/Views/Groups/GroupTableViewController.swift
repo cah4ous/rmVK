@@ -36,19 +36,11 @@ final class GroupTableViewController: UITableViewController {
     }
 
     private func loadData() {
-        do {
-            guard let newGroups = RealmService.defaultRealmService.readData(type: Group.self)
-            else { return }
-            addNotificationToken(result: newGroups)
-            if !newGroups.isEmpty {
-                groups = newGroups
-            } else {
-                fetchUserGroups()
-            }
-            tableView.reloadData()
-        } catch {
-            print(error.localizedDescription)
-        }
+        guard let newGroups = RealmService.defaultRealmService.readData(type: Group.self)
+        else { return }
+        addNotificationToken(result: newGroups)
+        operationGroups()
+        groups = newGroups
     }
 
     private func addNotificationToken(result: Results<Group>) {
@@ -66,16 +58,8 @@ final class GroupTableViewController: UITableViewController {
         }
     }
 
-    private func fetchUserGroups() {
-        networkService.fetchUserGroups(userID: Session.shared.userID) { [weak self] item in
-            guard let self = self else { return }
-            switch item {
-            case let .success(data):
-                RealmService.defaultRealmService.saveData(data.groups.groups)
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
-        }
+    private func operationGroups() {
+        networkService.fetchGroups()
     }
 
     // MARK: - Public Methods
