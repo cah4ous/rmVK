@@ -1,12 +1,6 @@
 // PromiseService.swift
 // Copyright © RoadMap. All rights reserved.
 
-//
-//  PromiseService.swift
-//  vkHW
-//
-//  Created by Александр Троицкий on 09.12.2022.
-//
 import Alamofire
 import PromiseKit
 
