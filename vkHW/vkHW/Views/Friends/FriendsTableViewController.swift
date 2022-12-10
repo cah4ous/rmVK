@@ -1,6 +1,7 @@
 // FriendsTableViewController.swift
 // Copyright © RoadMap. All rights reserved.
 
+import PromiseKit
 import RealmSwift
 import UIKit
 
@@ -24,9 +25,9 @@ final class FriendsTableViewController: UITableViewController {
 
     private var userSectionsTitles: [Character] = []
     private var sortedUsersMap = [Character: [User]]()
-    private var networkService = NetworkService()
     private var friendToken: NotificationToken?
     private var users: Results<User>?
+    private var promiseService = PromiseService()
 
     // MARK: - Lifecycle
 
@@ -113,14 +114,12 @@ final class FriendsTableViewController: UITableViewController {
     }
 
     private func fetchFriends() {
-        networkService.fetchFriends { [weak self] item in
-            guard let self = self else { return }
-            switch item {
-            case let .success(data):
-                RealmService.defaultRealmService.saveData(data.users.users)
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
+        firstly {
+            promiseService.sendFriendsRequest()
+        }.done { users in
+            RealmService.defaultRealmService.saveData(users.users.users)
+        }.catch { error in
+            print(error.localizedDescription)
         }
     }
 
