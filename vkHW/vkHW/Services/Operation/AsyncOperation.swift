@@ -6,16 +6,16 @@ import Foundation
 /// Класс для универсальных сетевых запросов
 class AsyncOperation: Operation {
     // MARK: Public Enum
-
+    
     enum State: String {
         case ready, executing, finished
         fileprivate var keyPath: String {
             "is" + rawValue.capitalized
         }
     }
-
+    
     // MARK: - Public Properties
-
+    
     var state = State.ready {
         willSet {
             willChangeValue(forKey: state.keyPath)
@@ -26,25 +26,25 @@ class AsyncOperation: Operation {
             didChangeValue(forKey: oldValue.keyPath)
         }
     }
-
+    
     override var isAsynchronous: Bool {
         true
     }
-
+    
     override var isReady: Bool {
         super.isReady && state == .ready
     }
-
+    
     override var isExecuting: Bool {
         state == .executing
     }
-
+    
     override var isFinished: Bool {
         state == .finished
     }
-
+    
     // MARK: Public Methods
-
+    
     override func start() {
         if isCancelled {
             state = .finished
@@ -53,7 +53,7 @@ class AsyncOperation: Operation {
             state = .executing
         }
     }
-
+    
     override func cancel() {
         super.cancel()
         state = .finished
