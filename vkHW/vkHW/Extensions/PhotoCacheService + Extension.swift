@@ -6,26 +6,26 @@ import UIKit
 /// Хранение в контейнере DataReloadable классы таблиц
 extension PhotoCacheService {
     class TableViewController: DataReloadable {
-        let table: UITableViewController
+        let tableViewController: UITableViewController
 
-        init(table: UITableViewController) {
-            self.table = table
+        init(tableViewController: UITableViewController) {
+            self.tableViewController = tableViewController
         }
 
         func reloadRow(at indexPath: IndexPath) {
-            table.tableView.reloadRows(at: [indexPath], with: .none)
+            tableViewController.tableView.reloadRows(at: [indexPath], with: .none)
         }
     }
 
     class Table: DataReloadable {
-        let table: UITableView
+        let tableView: UITableView
 
-        init(table: UITableView) {
-            self.table = table
+        init(tableView: UITableView) {
+            self.tableView = tableView
         }
 
         func reloadRow(at indexPath: IndexPath) {
-            table.reloadRows(at: [indexPath], with: .none)
+            tableView.reloadRows(at: [indexPath], with: .none)
         }
     }
 }

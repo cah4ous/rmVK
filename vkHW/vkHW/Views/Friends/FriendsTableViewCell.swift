@@ -7,7 +7,7 @@ import UIKit
 final class FriendsTableViewCell: UITableViewCell {
     // MARK: - Private IBOutlets
 
-    @IBOutlet var avatarImageView: UIImageView!
+    @IBOutlet private var avatarImageView: UIImageView!
     @IBOutlet private var nameLabel: UILabel!
 
     // MARK: - Public Methods
