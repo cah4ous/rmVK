@@ -12,8 +12,8 @@ final class FriendsTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configure(nameLabelText: String, avatarImage: UIImage?) {
+    func configure(nameLabelText: String, url: String, photoCacheService: PhotoCacheService?) {
         nameLabel.text = nameLabelText
-        avatarImageView.image = avatarImage
+        avatarImageView.image = photoCacheService?.photo(byUrl: url)
     }
 }

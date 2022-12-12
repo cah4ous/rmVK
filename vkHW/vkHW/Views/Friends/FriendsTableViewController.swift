@@ -79,7 +79,8 @@ final class FriendsTableViewController: UITableViewController {
 
         cell.configure(
             nameLabelText: friend.firstName,
-            avatarImage: photoCacheService.photo(byUrl: friend.photoImageName ?? "")
+            url: friend.photoImageName ?? Constants.avatarImageName,
+            photoCacheService: photoCacheService
         )
         return cell
     }

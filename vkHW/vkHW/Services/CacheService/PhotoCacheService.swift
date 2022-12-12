@@ -39,13 +39,13 @@ final class PhotoCacheService {
     }()
 
     private let cacheLifeTime: TimeInterval = Constants.cacheLifeTime
-    private var images = [String: UIImage]()
+    private var imagesMap = [String: UIImage]()
 
     // MARK: - Public Methods
 
     func photo(byUrl url: String) -> UIImage? {
         var image: UIImage?
-        if let photo = images[url] {
+        if let photo = imagesMap[url] {
             image = photo
         } else if let photo = getImageFromCache(url: url) {
             image = photo
@@ -94,18 +94,17 @@ final class PhotoCacheService {
             return nil
         }
         DispatchQueue.main.async {
-            self.images[url] = image
+            self.imagesMap[url] = image
         }
         return image
     }
 
     private func loadPhoto(byUrl url: String) {
-        AF.request(url).responseData(queue: DispatchQueue.global()) { [weak self] response in
+        AF.request(url).responseData(queue: DispatchQueue.global()) { response in
             guard let data = response.data,
-                  let self = self,
                   let image = UIImage(data: data) else { return }
             DispatchQueue.main.async {
-                self.images[url] = image
+                self.imagesMap[url] = image
             }
             self.saveImageToCache(url: url, image: image)
         }
