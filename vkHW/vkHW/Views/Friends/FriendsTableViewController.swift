@@ -28,7 +28,6 @@ final class FriendsTableViewController: UITableViewController {
     private var friendToken: NotificationToken?
     private var users: Results<User>?
     private var promiseService = PromiseService()
-    private var photoCacheService = PhotoCacheService()
 
     // MARK: - Lifecycle
 
@@ -79,8 +78,8 @@ final class FriendsTableViewController: UITableViewController {
 
         cell.configure(
             nameLabelText: friend.firstName,
-            url: friend.photoImageName ?? Constants.avatarImageName,
-            photoCacheService: photoCacheService
+            avatarImageName: friend.photoImageName ?? "0",
+            networkService: networkService
         )
         return cell
     }

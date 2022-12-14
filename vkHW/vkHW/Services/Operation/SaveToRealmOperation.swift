@@ -13,6 +13,6 @@ final class SaveToRealmOperation: Operation {
 
     override func main() {
         guard let parseData = dependencies.first as? ParseDataOperation else { return }
-        realmService.saveData(parseData.group)
+        realmService.saveData(parseData.outputData)
     }
 }

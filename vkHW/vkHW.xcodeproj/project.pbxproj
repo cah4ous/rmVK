@@ -31,9 +31,6 @@
 		7170FC93291E5B1000069CF2 /* CustomPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170FC92291E5B1000069CF2 /* CustomPopAnimator.swift */; };
 		7170FC95291E5B3500069CF2 /* CustomPushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170FC94291E5B3500069CF2 /* CustomPushAnimator.swift */; };
 		7170FC97291E5B8900069CF2 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7170FC96291E5B8900069CF2 /* CustomViewController.swift */; };
-		7172E0032946327000454611 /* PhotoCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7172E0022946327000454611 /* PhotoCacheService.swift */; };
-		7172E0052946377C00454611 /* PhotoCacheService + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7172E0042946377C00454611 /* PhotoCacheService + Extension.swift */; };
-		7172E0072946389D00454611 /* DataReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7172E0062946389D00454611 /* DataReloadable.swift */; };
 		717C68872931E395008FD278 /* ResponsePhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717C68862931E395008FD278 /* ResponsePhotos.swift */; };
 		718515332914AD3E00944220 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718515322914AD3E00944220 /* FriendsTableViewCell.swift */; };
 		7189F6DA29350374005728C0 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7189F6D929350374005728C0 /* Photos.swift */; };
@@ -88,9 +85,6 @@
 		7170FC92291E5B1000069CF2 /* CustomPopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopAnimator.swift; sourceTree = "<group>"; };
 		7170FC94291E5B3500069CF2 /* CustomPushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPushAnimator.swift; sourceTree = "<group>"; };
 		7170FC96291E5B8900069CF2 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
-		7172E0022946327000454611 /* PhotoCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCacheService.swift; sourceTree = "<group>"; };
-		7172E0042946377C00454611 /* PhotoCacheService + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoCacheService + Extension.swift"; sourceTree = "<group>"; };
-		7172E0062946389D00454611 /* DataReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataReloadable.swift; sourceTree = "<group>"; };
 		717C68862931E395008FD278 /* ResponsePhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsePhotos.swift; sourceTree = "<group>"; };
 		7185152A2914AB3200944220 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		718515322914AD3E00944220 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
@@ -196,7 +190,6 @@
 				71E1B4C62942F9E6006FC152 /* Promise */,
 				7131F7E9293780B800ABCF48 /* RealmService */,
 				71FB7B55292E57500062CC6E /* NetworkService */,
-				7172E0012946324B00454611 /* CacheService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -237,15 +230,6 @@
 				7170FC96291E5B8900069CF2 /* CustomViewController.swift */,
 			);
 			path = Animator;
-			sourceTree = "<group>";
-		};
-		7172E0012946324B00454611 /* CacheService */ = {
-			isa = PBXGroup;
-			children = (
-				7172E0022946327000454611 /* PhotoCacheService.swift */,
-				7172E0062946389D00454611 /* DataReloadable.swift */,
-			);
-			path = CacheService;
 			sourceTree = "<group>";
 		};
 		717C68852931E38C008FD278 /* Photos */ = {
@@ -359,7 +343,6 @@
 			children = (
 				71CA78352912FEC500A39980 /* UIViewController + Extension.swift */,
 				7189F6E829350A36005728C0 /* UIImageView + Extension.swift */,
-				7172E0042946377C00454611 /* PhotoCacheService + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -553,16 +536,13 @@
 				711BC6D72914D8A0004721F1 /* LikeControl.swift in Sources */,
 				7170FC93291E5B1000069CF2 /* CustomPopAnimator.swift in Sources */,
 				71621F35293FDC1C0016E01F /* Posts.swift in Sources */,
-				7172E0032946327000454611 /* PhotoCacheService.swift in Sources */,
 				71621F33293FDB960016E01F /* ResponsePosts.swift in Sources */,
 				71CA78362912FEC500A39980 /* UIViewController + Extension.swift in Sources */,
 				71BC84DF293123A4001E79B5 /* ResponseUsers.swift in Sources */,
 				71F831C129408D7800B36E62 /* NewsCellProtocol.swift in Sources */,
 				71621F37293FE1C40016E01F /* News.swift in Sources */,
 				71E1B4C82942F9FE006FC152 /* PromiseService.swift in Sources */,
-				7172E0052946377C00454611 /* PhotoCacheService + Extension.swift in Sources */,
 				711BC6D32914C1B3004721F1 /* GroupTableViewCell.swift in Sources */,
-				7172E0072946389D00454611 /* DataReloadable.swift in Sources */,
 				711BC6D52914D84E004721F1 /* AvatarView.swift in Sources */,
 				7189F6E929350A36005728C0 /* UIImageView + Extension.swift in Sources */,
 				7189F6DE2935038F005728C0 /* Url.swift in Sources */,

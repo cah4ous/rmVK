@@ -92,24 +92,40 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D5w-lk-Uxj">
-                                            <rect key="frame" x="338" y="5" width="40" height="40"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xC7-YB-5og" customClass="AvatarView" customModule="vkHW" customModuleProvider="target">
+                                            <rect key="frame" x="354" y="5" width="40" height="40"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="HVz-m5-moM"/>
+                                                <constraint firstAttribute="width" secondItem="xC7-YB-5og" secondAttribute="height" multiplier="1:1" id="KGZ-af-pRk"/>
+                                                <constraint firstAttribute="width" constant="40" id="cGN-ec-27o"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="20"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                    <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
-                                        </imageView>
+                                        </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="xC7-YB-5og" secondAttribute="trailing" constant="20" symbolic="YES" id="Dex-n9-AHW"/>
+                                        <constraint firstItem="xC7-YB-5og" firstAttribute="leading" secondItem="7EV-8S-pk7" secondAttribute="trailing" constant="222" id="Is6-eJ-Xv5"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="7EV-8S-pk7" secondAttribute="bottom" constant="2" id="XyA-7W-JWn"/>
+                                        <constraint firstItem="xC7-YB-5og" firstAttribute="leading" secondItem="7EV-8S-pk7" secondAttribute="trailing" constant="222" id="Y6c-9D-c9b"/>
                                         <constraint firstItem="7EV-8S-pk7" firstAttribute="leading" secondItem="VFq-mx-RuY" secondAttribute="leadingMargin" id="ZgQ-dp-m97"/>
+                                        <constraint firstAttribute="bottom" secondItem="xC7-YB-5og" secondAttribute="bottom" constant="5" id="g9L-1F-2SQ"/>
                                         <constraint firstItem="7EV-8S-pk7" firstAttribute="top" secondItem="VFq-mx-RuY" secondAttribute="topMargin" constant="1" id="gPT-vn-QCK"/>
+                                        <constraint firstItem="xC7-YB-5og" firstAttribute="top" secondItem="VFq-mx-RuY" secondAttribute="top" constant="5" id="sbu-mi-6ex"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="avatarImageView" destination="D5w-lk-Uxj" id="bwJ-JU-3R1"/>
+                                    <outlet property="avatarView" destination="xC7-YB-5og" id="Nuh-fO-Bd6"/>
                                     <outlet property="nameLabel" destination="7EV-8S-pk7" id="otp-se-jNb"/>
                                 </connections>
                             </tableViewCell>
