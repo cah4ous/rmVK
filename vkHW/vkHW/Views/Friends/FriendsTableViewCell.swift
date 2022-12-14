@@ -7,13 +7,13 @@ import UIKit
 final class FriendsTableViewCell: UITableViewCell {
     // MARK: - Private IBOutlets
 
-    @IBOutlet private var avatarView: AvatarView!
+    @IBOutlet private var avatarImageView: UIImageView!
     @IBOutlet private var nameLabel: UILabel!
 
     // MARK: - Public Methods
 
-    func configure(nameLabelText: String, avatarImageName: String, networkService: NetworkService) {
+    func configure(nameLabelText: String, url: String, photoCacheService: PhotoCacheService?) {
         nameLabel.text = nameLabelText
-        avatarView.avatarImageView.loadData(url: avatarImageName, networkService: networkService)
+        avatarImageView.image = photoCacheService?.photo(byUrl: url)
     }
 }
