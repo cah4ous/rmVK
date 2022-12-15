@@ -9,11 +9,10 @@ final class NewsFooterCell: UITableViewCell, NewsCellConfigurable {
 
     @IBOutlet private var likeControl: LikeControl!
     @IBOutlet private var likesCountLabel: UILabel!
-    @IBOutlet private var viewLabel: UILabel!
 
     // MARK: - Public Methods
 
-    func configure(_ news: NewsFeed, networkService: NetworkService) {
+    func configure(_ news: NewsFeed, photoCacheService: PhotoCacheService) {
         likesCountLabel.text = "\(news.likes.count)"
     }
 }

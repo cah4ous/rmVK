@@ -8,4 +8,10 @@ import RealmSwift
 final class Url: Object, Decodable {
     /// Ссылка на фотографию
     @Persisted var url: String
+    /// Ширина
+    var width: Int
+    /// Высота
+    var height: Int
+    /// Соотношение сторон
+    var aspectRatio: CGFloat { CGFloat(height) / CGFloat(width) }
 }

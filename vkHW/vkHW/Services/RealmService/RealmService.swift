@@ -29,13 +29,13 @@ final class RealmService {
 
     func saveData<T: Object>(_ newItems: [T]) {
         do {
-            let realm = try Realm(configuration: config)
+            let realm = try Realm()
             let oldItems = realm.objects(T.self)
             realm.beginWrite()
             realm.add(newItems, update: .modified)
             try realm.commitWrite()
         } catch {
-            print(error.localizedDescription)
+            print(error)
         }
     }
 }

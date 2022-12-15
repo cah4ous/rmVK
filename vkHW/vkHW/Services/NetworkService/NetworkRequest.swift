@@ -21,7 +21,7 @@ enum NetworkRequests {
         static let newsFilter = "&filters=post"
         static let friendsRequest = "friends.get"
         static let photosRequest = "photos.getAll"
-        static let groupsRequest = "groups.get?"
+        static let groupsRequest = "groups.get"
         static let globalGroupsRequest = "groups.search"
         static let redirectURI = "redirect_uri"
         static let redirectValue = "https://oauth.vk.com/blank.html"
@@ -50,8 +50,7 @@ enum NetworkRequests {
             return "\(baseURLWithMethod(Constants.photosRequest))" +
                 "\(Constants.ownerIdParam)\(userID)\(Constants.withExtendedParam)"
         case .groups:
-            return "\(Constants.baseURL)\(Constants.groupsRequest)\(Constants.testOwnerId)" +
-                "\(Constants.accessToken)\(Session.shared.token)\(Constants.withExtendedParam)"
+            return "\(baseURLWithMethod(Constants.groupsRequest))\(Constants.withExtendedParam)"
         case .news:
             return "\(baseURLWithMethod(Constants.newsRequest))\(Constants.newsFilter)"
         case .friends:

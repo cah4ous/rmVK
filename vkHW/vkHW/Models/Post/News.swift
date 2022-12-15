@@ -27,6 +27,8 @@ final class NewsFeed: Decodable {
     var type: PostItemType?
     /// Лайки
     var likes: Likes
+    /// Вложения
+    let attachments: [Attachment]?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -34,5 +36,6 @@ final class NewsFeed: Decodable {
         case text
         case likes
         case date
+        case attachments
     }
 }

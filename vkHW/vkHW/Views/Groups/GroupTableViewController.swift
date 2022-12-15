@@ -21,6 +21,7 @@ final class GroupTableViewController: UITableViewController {
     private var networkService = NetworkService()
     private var realmService = RealmService()
     private var notificationToken: NotificationToken?
+    private var photoCacheService = PhotoCacheService()
 
     // MARK: - Lifecycle
 
@@ -32,6 +33,7 @@ final class GroupTableViewController: UITableViewController {
     // MARK: - Private Methods
 
     private func initMethods() {
+        operationGroups()
         loadData()
     }
 
@@ -39,7 +41,6 @@ final class GroupTableViewController: UITableViewController {
         guard let newGroups = RealmService.defaultRealmService.readData(type: Group.self)
         else { return }
         addNotificationToken(result: newGroups)
-        operationGroups()
         groups = newGroups
     }
 
@@ -81,8 +82,8 @@ final class GroupTableViewController: UITableViewController {
         else { return UITableViewCell() }
         cell.configure(
             nameLabelText: group.name,
-            groupsImageName: group.photoImageName ?? "0",
-            networkService: networkService
+            url: group.photoImageName ?? "0",
+            photoCacheService: photoCacheService
         )
         return cell
     }

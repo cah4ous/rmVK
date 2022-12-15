@@ -4,7 +4,7 @@
 import UIKit
 
 // Экран новостей
-final class NewsTableViewController: UITableViewController {
+final class NewsTableViewController: UITableViewController, UITableViewDataSourcePrefetching {
     // MARK: Constants
 
     private enum Constants {
@@ -17,23 +17,68 @@ final class NewsTableViewController: UITableViewController {
     private enum NewsCellTypes: Int, CaseIterable {
         case header
         case content
+        case image
         case footer
     }
+
+    // MARK: - Visual Components
+
+    private let refreshControll = UIRefreshControl()
 
     // MARK: Private Properties
 
     private let networkService = NetworkService()
     private var posts: [Posts] = []
     private var news: [NewsFeed] = []
+    private var photoCacheService = PhotoCacheService()
+    private var nextPage = ""
+    private var currentDate = 0
+    private var isLoading = false
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.prefetchDataSource = self
         initMethods()
     }
 
     // MARK: - Public Methods
+
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        let sections = indexPaths.map(\.section)
+        guard let maxSection = sections.max(),
+              maxSection > news.count - 3,
+              isLoading == false
+        else { return }
+        isLoading = true
+        networkService.fetchUserPosts(startTime: nil, nextPage: nextPage) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(data):
+                let indexSet = (self.news.count ..< self.news.count + data.posts.newsFeeds.count).map { $0 }
+                self.currentDate = data.posts.newsFeeds.first?.date ?? 0
+                self.news.append(contentsOf: data.posts.newsFeeds)
+                self.isLoading = false
+                self.tableView.insertSections(IndexSet(indexSet), with: .automatic)
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 2:
+            let tableWidth = tableView.bounds.width
+            guard let aspectRatio = news[indexPath.section].attachments?.last?.photo?.urls.first?.aspectRatio
+            else { return CGFloat() }
+            let cellHeight = tableWidth * aspectRatio
+            return cellHeight
+        default:
+            return UITableView.automaticDimension
+        }
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         NewsCellTypes.allCases.count
@@ -41,22 +86,24 @@ final class NewsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var post = news[indexPath.section]
-        let cellType = NewsCellTypes(rawValue: indexPath.row) ?? .content
+        let cellType = NewsCellTypes(rawValue: indexPath.row) ?? .image
         var cellIdentifier = ""
 
         switch cellType {
         case .header:
             cellIdentifier = Constants.newsHeaderCellIdentifier
-        case .content:
-            cellIdentifier = Constants.newsPostCellIdentifier
+        case .image:
+            cellIdentifier = Constants.newsImageCellIdentifier
         case .footer:
             cellIdentifier = Constants.newsFooterCellIdentifier
+        case .content:
+            cellIdentifier = Constants.newsPostCellIdentifier
         }
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: cellIdentifier,
             for: indexPath
         ) as? NewsCell else { return UITableViewCell() }
-        cell.configure(post, networkService: networkService)
+        cell.configure(post, photoCacheService: photoCacheService)
         return cell
     }
 
@@ -66,12 +113,27 @@ final class NewsTableViewController: UITableViewController {
 
     // MARK: - Private Methods
 
+    @objc private func refreshDataAction() {
+        fetchUserPosts()
+        tableView.reloadData()
+    }
+
     private func initMethods() {
         createTableViewSettings()
         fetchUserPosts()
+        setupRefreshControll()
+    }
+
+    private func setupRefreshControll() {
+        refreshControll.addTarget(
+            self,
+            action: #selector(refreshDataAction),
+            for: .valueChanged
+        )
     }
 
     private func createTableViewSettings() {
+        tableView.addSubview(refreshControll)
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -97,11 +159,18 @@ final class NewsTableViewController: UITableViewController {
     }
 
     private func fetchUserPosts() {
+        var mostFreshDate: TimeInterval?
+        if let firstItem = news.first {
+            mostFreshDate = Double(firstItem.date) + 1
+        }
+
         networkService.fetchUserPosts { [weak self] item in
             guard let self = self else { return }
+            self.refreshControll.endRefreshing()
             switch item {
             case let .success(data):
                 self.filteringNews(response: data.posts)
+                self.nextPage = data.posts.nextPage ?? ""
             case let .failure(error):
                 print(error.localizedDescription)
             }

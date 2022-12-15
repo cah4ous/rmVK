@@ -11,6 +11,8 @@ final class NetworkService {
     private enum Constants {
         static let groupSearchParam = "Football"
         static let userID = "109010578"
+        static let startAt = "&start_time=0"
+        static let startFrom = "&start_from="
     }
 
     // MARK: - Public Properties
@@ -42,8 +44,15 @@ final class NetworkService {
         loadData(urlPath: NetworkRequests.photos(userID: userID).urlPath, completion: completion)
     }
 
-    func fetchUserPosts(completion: @escaping (Result<ResponsePosts, Error>) -> Void) {
-        loadData(urlPath: NetworkRequests.news.urlPath, completion: completion)
+    func fetchUserPosts(
+        startTime: TimeInterval? = nil,
+        nextPage: String = "",
+        completion: @escaping (Result<ResponsePosts, Error>) -> Void
+    ) {
+        loadData(
+            urlPath: NetworkRequests.news.urlPath + Constants.startAt + Constants.startFrom + nextPage,
+            completion: completion
+        )
     }
 
     func fetchGroups() {

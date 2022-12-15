@@ -34,8 +34,11 @@
 		7172E0032946327000454611 /* PhotoCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7172E0022946327000454611 /* PhotoCacheService.swift */; };
 		7172E0052946377C00454611 /* PhotoCacheService + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7172E0042946377C00454611 /* PhotoCacheService + Extension.swift */; };
 		7172E0072946389D00454611 /* DataReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7172E0062946389D00454611 /* DataReloadable.swift */; };
+		71789FCB29492A93009CC322 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B001DA291B755600F250B4 /* NewsTableViewController.swift */; };
 		717C68872931E395008FD278 /* ResponsePhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717C68862931E395008FD278 /* ResponsePhotos.swift */; };
 		718515332914AD3E00944220 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718515322914AD3E00944220 /* FriendsTableViewCell.swift */; };
+		718878AA294A3D6900BCE048 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718878A9294A3D6900BCE048 /* Attachment.swift */; };
+		718878AC294A7CD500BCE048 /* DateFormatter + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718878AB294A7CD500BCE048 /* DateFormatter + Extension.swift */; };
 		7189F6DA29350374005728C0 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7189F6D929350374005728C0 /* Photos.swift */; };
 		7189F6DC29350389005728C0 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7189F6DB29350389005728C0 /* Photo.swift */; };
 		7189F6DE2935038F005728C0 /* Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7189F6DD2935038F005728C0 /* Url.swift */; };
@@ -45,9 +48,8 @@
 		7189F6E629350428005728C0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7189F6E529350428005728C0 /* User.swift */; };
 		7189F6E929350A36005728C0 /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7189F6E829350A36005728C0 /* UIImageView + Extension.swift */; };
 		71AB94DE294054760065A6A4 /* Likes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AB94DD294054760065A6A4 /* Likes.swift */; };
-		71B001DB291B755600F250B4 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B001DA291B755600F250B4 /* NewsTableViewController.swift */; };
 		71BC84DF293123A4001E79B5 /* ResponseUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC84DD29312204001E79B5 /* ResponseUsers.swift */; };
-		71BC84E429315B94001E79B5 /* ResponseGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC84E329315B94001E79B5 /* ResponseGroup.swift */; };
+		71BC84E429315B94001E79B5 /* ResponseGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC84E329315B94001E79B5 /* ResponseGroups.swift */; };
 		71CA78362912FEC500A39980 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CA78352912FEC500A39980 /* UIViewController + Extension.swift */; };
 		71CA78382913054200A39980 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71CA78372913054200A39980 /* Colors.xcassets */; };
 		71CFE853291C04DD00A4746C /* LoadDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CFE852291C04DD00A4746C /* LoadDotsView.swift */; };
@@ -94,6 +96,8 @@
 		717C68862931E395008FD278 /* ResponsePhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsePhotos.swift; sourceTree = "<group>"; };
 		7185152A2914AB3200944220 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		718515322914AD3E00944220 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
+		718878A9294A3D6900BCE048 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		718878AB294A7CD500BCE048 /* DateFormatter + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter + Extension.swift"; sourceTree = "<group>"; };
 		7189F6D929350374005728C0 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		7189F6DB29350389005728C0 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		7189F6DD2935038F005728C0 /* Url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Url.swift; sourceTree = "<group>"; };
@@ -106,7 +110,7 @@
 		71B001DA291B755600F250B4 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 		71BBEBEA291CEE32004D797D /* FriendPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPhotoViewController.swift; sourceTree = "<group>"; };
 		71BC84DD29312204001E79B5 /* ResponseUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseUsers.swift; sourceTree = "<group>"; };
-		71BC84E329315B94001E79B5 /* ResponseGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseGroup.swift; sourceTree = "<group>"; };
+		71BC84E329315B94001E79B5 /* ResponseGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseGroups.swift; sourceTree = "<group>"; };
 		71CA78352912FEC500A39980 /* UIViewController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		71CA78372913054200A39980 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		71CFE852291C04DD00A4746C /* LoadDotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadDotsView.swift; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 				71621F34293FDC1C0016E01F /* Posts.swift */,
 				71621F36293FE1C40016E01F /* News.swift */,
 				71AB94DD294054760065A6A4 /* Likes.swift */,
+				718878A9294A3D6900BCE048 /* Attachment.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -347,7 +352,7 @@
 		71BC84E229315B79001E79B5 /* Groups */ = {
 			isa = PBXGroup;
 			children = (
-				71BC84E329315B94001E79B5 /* ResponseGroup.swift */,
+				71BC84E329315B94001E79B5 /* ResponseGroups.swift */,
 				7189F6E129350407005728C0 /* Group.swift */,
 				7189F6DF293503F9005728C0 /* Groups.swift */,
 			);
@@ -360,6 +365,7 @@
 				71CA78352912FEC500A39980 /* UIViewController + Extension.swift */,
 				7189F6E829350A36005728C0 /* UIImageView + Extension.swift */,
 				7172E0042946377C00454611 /* PhotoCacheService + Extension.swift */,
+				718878AB294A7CD500BCE048 /* DateFormatter + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -551,6 +557,7 @@
 				7131F7EB293780CD00ABCF48 /* RealmService.swift in Sources */,
 				7189F6DA29350374005728C0 /* Photos.swift in Sources */,
 				711BC6D72914D8A0004721F1 /* LikeControl.swift in Sources */,
+				718878AA294A3D6900BCE048 /* Attachment.swift in Sources */,
 				7170FC93291E5B1000069CF2 /* CustomPopAnimator.swift in Sources */,
 				71621F35293FDC1C0016E01F /* Posts.swift in Sources */,
 				7172E0032946327000454611 /* PhotoCacheService.swift in Sources */,
@@ -569,11 +576,11 @@
 				71621F3D293FF75F0016E01F /* NewsHeaderCell.swift in Sources */,
 				711208A22911D1BA00E7784A /* AppDelegate.swift in Sources */,
 				717C68872931E395008FD278 /* ResponsePhotos.swift in Sources */,
-				71B001DB291B755600F250B4 /* NewsTableViewController.swift in Sources */,
 				71DD22FE292E163F002DEDD4 /* AutorisationViewController.swift in Sources */,
+				718878AC294A7CD500BCE048 /* DateFormatter + Extension.swift in Sources */,
 				718515332914AD3E00944220 /* FriendsTableViewCell.swift in Sources */,
 				7170FC95291E5B3500069CF2 /* CustomPushAnimator.swift in Sources */,
-				71BC84E429315B94001E79B5 /* ResponseGroup.swift in Sources */,
+				71BC84E429315B94001E79B5 /* ResponseGroups.swift in Sources */,
 				7170FC97291E5B8900069CF2 /* CustomViewController.swift in Sources */,
 				71621F43293FF88A0016E01F /* NewsPostCell.swift in Sources */,
 				71E1B4C52942EE2E006FC152 /* SaveToRealmOperation.swift in Sources */,
@@ -588,6 +595,7 @@
 				71FB7B59292E5CF50062CC6E /* NetworkService.swift in Sources */,
 				71FF6A03292F7CC100C036A4 /* NetworkRequest.swift in Sources */,
 				71E1B4BF2942ED06006FC152 /* AsyncOperation.swift in Sources */,
+				71789FCB29492A93009CC322 /* NewsTableViewController.swift in Sources */,
 				715BB3002931F27A00ABDE54 /* FriendsTableViewController.swift in Sources */,
 				7189F6E229350407005728C0 /* Group.swift in Sources */,
 				711BC6D12914BF48004721F1 /* GroupTableViewController.swift in Sources */,

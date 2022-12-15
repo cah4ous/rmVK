@@ -12,8 +12,8 @@ final class GroupTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func configure(nameLabelText: String, groupsImageName: String, networkService: NetworkService) {
+    func configure(nameLabelText: String, url: String, photoCacheService: PhotoCacheService?) {
         groupNameLabel.text = nameLabelText
-        groupImageView.loadData(url: groupsImageName, networkService: networkService)
+        groupImageView.image = photoCacheService?.photo(byUrl: url)
     }
 }

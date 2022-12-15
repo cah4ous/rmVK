@@ -18,7 +18,7 @@ final class ParseDataOperation: Operation {
             let response = try JSONDecoder().decode(ResponseGroups.self, from: data)
             group = response.groups.groups
         } catch {
-            print(error.localizedDescription)
+            print(error)
         }
     }
 }
