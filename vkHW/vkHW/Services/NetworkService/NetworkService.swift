@@ -44,15 +44,8 @@ final class NetworkService {
         loadData(urlPath: NetworkRequests.photos(userID: userID).urlPath, completion: completion)
     }
 
-    func fetchUserPosts(
-        startTime: TimeInterval? = nil,
-        nextPage: String = "",
-        completion: @escaping (Result<ResponsePosts, Error>) -> Void
-    ) {
-        loadData(
-            urlPath: NetworkRequests.news.urlPath + Constants.startAt + Constants.startFrom + nextPage,
-            completion: completion
-        )
+    func fetchUserPosts(completion: @escaping (Result<ResponsePosts, Error>) -> Void) {
+        loadData(urlPath: NetworkRequests.news.urlPath, completion: completion)
     }
 
     func fetchGroups() {

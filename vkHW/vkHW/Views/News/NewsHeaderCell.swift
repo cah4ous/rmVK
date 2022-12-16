@@ -13,14 +13,21 @@ final class NewsHeaderCell: UITableViewCell, NewsCellConfigurable {
 
     // MARK: - Private Properties
 
-    private let dateFormatter = DateFormatter()
-
     // MARK: - Public Methods
 
-    func configure(_ news: NewsFeed, photoCacheService: PhotoCacheService) {
+    func configure(_ news: NewsFeed, networkService: NetworkService) {
         guard let url = news.avatarPath else { return }
         postAvatarNameLabel.text = news.authorName
         postAvatarImageView.image = photoCacheService.photo(byUrl: url)
-        postDateLabel.text = dateFormatter.convert(date: news.date)
+        postDateLabel.text = convert(date: news.date)
+    }
+
+    func convert(date: Int) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(date))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = Constants.dateFormat
+        dateFormatter.timeZone = .current
+        let localDate = dateFormatter.string(from: date)
+        return localDate
     }
 }
