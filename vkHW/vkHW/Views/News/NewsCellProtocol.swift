@@ -8,5 +8,5 @@ typealias NewsCell = UITableViewCell & NewsCellConfigurable
 
 /// Конфигурация ячеек
 protocol NewsCellConfigurable {
-    func configure(_ news: NewsFeed, photoCacheService: PhotoCacheService)
+    func configure(_ news: NewsFeed, networkService: NetworkService)
 }
