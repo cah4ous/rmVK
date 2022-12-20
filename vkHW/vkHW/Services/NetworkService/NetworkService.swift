@@ -50,7 +50,7 @@ final class NetworkService {
         completion: @escaping (Result<ResponsePosts, Error>) -> Void
     ) {
         loadData(
-            urlPath: NetworkRequests.news.urlPath + Constants.startAt + Constants.startFrom + nextPage,
+            urlPath: "\(NetworkRequests.news.urlPath)\(Constants.startAt)\(Constants.startFrom)\(nextPage)",
             completion: completion
         )
     }

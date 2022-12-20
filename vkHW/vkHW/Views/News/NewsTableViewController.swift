@@ -52,19 +52,7 @@ final class NewsTableViewController: UITableViewController, UITableViewDataSourc
               isLoading == false
         else { return }
         isLoading = true
-        networkService.fetchUserPosts(startTime: nil, nextPage: nextPage) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case let .success(data):
-                let indexSet = (self.news.count ..< self.news.count + data.posts.newsFeeds.count).map { $0 }
-                self.currentDate = data.posts.newsFeeds.first?.date ?? 0
-                self.news.append(contentsOf: data.posts.newsFeeds)
-                self.isLoading = false
-                self.tableView.insertSections(IndexSet(indexSet), with: .automatic)
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
-        }
+        prefetchNextPageNews()
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -123,6 +111,22 @@ final class NewsTableViewController: UITableViewController, UITableViewDataSourc
         fetchUserPosts()
         setupRefreshControll()
     }
+    
+    private func prefetchNextPageNews() {
+        networkService.fetchUserPosts(startTime: nil, nextPage: nextPage) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(data):
+                let indexSet = (self.news.count ..< self.news.count + data.posts.newsFeeds.count).map { $0 }
+                self.currentDate = data.posts.newsFeeds.first?.date ?? 0
+                self.news.append(contentsOf: data.posts.newsFeeds)
+                self.isLoading = false
+                self.tableView.insertSections(IndexSet(indexSet), with: .automatic)
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 
     private func setupRefreshControll() {
         refreshControll.addTarget(
@@ -163,10 +167,10 @@ final class NewsTableViewController: UITableViewController, UITableViewDataSourc
         if let firstItem = news.first {
             mostFreshDate = Double(firstItem.date) + 1
         }
-        networkService.fetchUserPosts { [weak self] item in
+        networkService.fetchUserPosts { [weak self] result in
             guard let self = self else { return }
             self.refreshControll.endRefreshing()
-            switch item {
+            switch result {
             case let .success(data):
                 self.filteringNews(response: data.posts)
                 self.nextPage = data.posts.nextPage ?? ""
