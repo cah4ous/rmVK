@@ -45,6 +45,29 @@ final class NewsTableViewController: UITableViewController, UITableViewDataSourc
 
     // MARK: - Public Methods
 
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        let sections = indexPaths.map(\.section)
+        guard let maxSection = sections.max(),
+              maxSection > news.count - 3,
+              isLoading == false
+        else { return }
+        isLoading = true
+        prefetchNextPageNews()
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 2:
+            let tableWidth = tableView.bounds.width
+            guard let aspectRatio = news[indexPath.section].attachments?.last?.photo?.urls.first?.aspectRatio
+            else { return CGFloat() }
+            let cellHeight = tableWidth * aspectRatio
+            return cellHeight
+        default:
+            return UITableView.automaticDimension
+        }
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         NewsCellTypes.allCases.count
     }
@@ -68,7 +91,7 @@ final class NewsTableViewController: UITableViewController, UITableViewDataSourc
             withIdentifier: cellIdentifier,
             for: indexPath
         ) as? NewsCell else { return UITableViewCell() }
-        cell.configure(post, networkService: NetworkService)
+        cell.configure(post, photoCacheService: photoCacheService)
         return cell
     }
 
@@ -87,6 +110,22 @@ final class NewsTableViewController: UITableViewController, UITableViewDataSourc
         createTableViewSettings()
         fetchUserPosts()
         setupRefreshControll()
+    }
+    
+    private func prefetchNextPageNews() {
+        networkService.fetchUserPosts(startTime: nil, nextPage: nextPage) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(data):
+                let indexSet = (self.news.count ..< self.news.count + data.posts.newsFeeds.count).map { $0 }
+                self.currentDate = data.posts.newsFeeds.first?.date ?? 0
+                self.news.append(contentsOf: data.posts.newsFeeds)
+                self.isLoading = false
+                self.tableView.insertSections(IndexSet(indexSet), with: .automatic)
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
     }
 
     private func setupRefreshControll() {
@@ -124,12 +163,17 @@ final class NewsTableViewController: UITableViewController, UITableViewDataSourc
     }
 
     private func fetchUserPosts() {
-        networkService.fetchUserPosts { [weak self] item in
+        var mostFreshDate: TimeInterval?
+        if let firstItem = news.first {
+            mostFreshDate = Double(firstItem.date) + 1
+        }
+        networkService.fetchUserPosts { [weak self] result in
             guard let self = self else { return }
             self.refreshControll.endRefreshing()
-            switch item {
+            switch result {
             case let .success(data):
                 self.filteringNews(response: data.posts)
+                self.nextPage = data.posts.nextPage ?? ""
             case let .failure(error):
                 print(error.localizedDescription)
             }

@@ -12,7 +12,7 @@ final class NewsFooterCell: UITableViewCell, NewsCellConfigurable {
 
     // MARK: - Public Methods
 
-    func configure(_ news: NewsFeed, networkService: NetworkService) {
+    func configure(_ news: NewsFeed, photoCacheService: PhotoCacheService) {
         likesCountLabel.text = "\(news.likes.count)"
     }
 }

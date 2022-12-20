@@ -18,7 +18,7 @@ final class NewsImageCell: UITableViewCell, NewsCellConfigurable {
         postImageView.image = nil
     }
 
-    func configure(_ news: NewsFeed, networkService: NetworkService) {
+    func configure(_ news: NewsFeed, photoCacheService: PhotoCacheService) {
         postImageView.image = photoCacheService.photo(byUrl: news.attachments?.first?.photo?.urls.last?.url ?? "")
     }
 }
